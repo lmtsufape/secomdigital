@@ -11,45 +11,58 @@ class FontSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('fonts')->insert([
-	        'font_name' => 'OpenSans-Bold',
-	        'file_name' => public_path("font/OpenSans-Bold.ttf"),
+     //    DB::table('fonts')->insert([
+	    //     'font_name' => 'OpenSans-Bold',
+	    //     'file_name' => public_path("font/OpenSans-Bold.ttf"),
+	    // ]);
+	    // DB::table('fonts')->insert([
+	    //     'font_name' => 'OpenSans-BoldItalic',
+	    //     'file_name' => public_path("font/OpenSans-BoldItalic.ttf"),
+	    // ]);
+	    // DB::table('fonts')->insert([
+	    //     'font_name' => 'OpenSans-ExtraBold',
+	    //     'file_name' => public_path("font/OpenSans-ExtraBold.ttf"),
+	    // ]);
+	    // DB::table('fonts')->insert([
+	    //     'font_name' => 'OpenSans-ExtraBoldItalic',
+	    //     'file_name' => public_path("font/OpenSans-ExtraBoldItalic.ttf"),
+	    // ]);
+	    // DB::table('fonts')->insert([
+	    //     'font_name' => 'OpenSans-Italic',
+	    //     'file_name' => public_path("font/OpenSans-Italic.ttf"),
+	    // ]);
+	    // DB::table('fonts')->insert([
+	    //     'font_name' => 'OpenSans-Light',
+	    //     'file_name' => public_path("font/OpenSans-Light.ttf"),
+	    // ]);
+	    // DB::table('fonts')->insert([
+	    //     'font_name' => 'OpenSans-LightItalic',
+	    //     'file_name' => public_path("font/OpenSans-LightItalic.ttf"),
+	    // ]);
+	    // DB::table('fonts')->insert([
+	    //     'font_name' => 'OpenSans-Regular',
+	    //     'file_name' => public_path("font/OpenSans-Regular.ttf"),
+	    // ]);
+	    // DB::table('fonts')->insert([
+	    //     'font_name' => 'OpenSans-Semibold',
+	    //     'file_name' => public_path("font/OpenSans-Semibold.ttf"),
+	    // ]);
+	    // DB::table('fonts')->insert([
+	    //     'font_name' => 'OpenSans-SemiboldItalic',
+	    //     'file_name' => public_path("font/OpenSans-SemiboldItalic.ttf"),
+	    // ]);
+
+	    DB::table('fonts')->insert([
+	        'font_name' => 'AMAZB',
+	        'file_name' => public_path("font/AMAZB.ttf"),
 	    ]);
 	    DB::table('fonts')->insert([
-	        'font_name' => 'OpenSans-BoldItalic',
-	        'file_name' => public_path("font/OpenSans-BoldItalic.ttf"),
+	        'font_name' => 'AMAZI',
+	        'file_name' => public_path("font/AMAZI.ttf"),
 	    ]);
 	    DB::table('fonts')->insert([
-	        'font_name' => 'OpenSans-ExtraBold',
-	        'file_name' => public_path("font/OpenSans-ExtraBold.ttf"),
-	    ]);
-	    DB::table('fonts')->insert([
-	        'font_name' => 'OpenSans-ExtraBoldItalic',
-	        'file_name' => public_path("font/OpenSans-ExtraBoldItalic.ttf"),
-	    ]);
-	    DB::table('fonts')->insert([
-	        'font_name' => 'OpenSans-Italic',
-	        'file_name' => public_path("font/OpenSans-Italic.ttf"),
-	    ]);
-	    DB::table('fonts')->insert([
-	        'font_name' => 'OpenSans-Light',
-	        'file_name' => public_path("font/OpenSans-Light.ttf"),
-	    ]);
-	    DB::table('fonts')->insert([
-	        'font_name' => 'OpenSans-LightItalic',
-	        'file_name' => public_path("font/OpenSans-LightItalic.ttf"),
-	    ]);
-	    DB::table('fonts')->insert([
-	        'font_name' => 'OpenSans-Regular',
-	        'file_name' => public_path("font/OpenSans-Regular.ttf"),
-	    ]);
-	    DB::table('fonts')->insert([
-	        'font_name' => 'OpenSans-Semibold',
-	        'file_name' => public_path("font/OpenSans-Semibold.ttf"),
-	    ]);
-	    DB::table('fonts')->insert([
-	        'font_name' => 'OpenSans-SemiboldItalic',
-	        'file_name' => public_path("font/OpenSans-SemiboldItalic.ttf"),
+	        'font_name' => 'AMAZR',
+	        'file_name' => public_path("font/AMAZR.ttf"),
 	    ]);
 
     }

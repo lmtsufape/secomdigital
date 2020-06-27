@@ -81,14 +81,15 @@ class ImageController extends Controller
 	    $path    = public_path("font/").$fonte->font_name.".ttf";
         $eixoX   = is_null($request->eixo_x) ? 1110 : $request->eixo_x;
         $eixoY   = is_null($request->eixo_y) ? 100  : $request->eixo_y;
+        $size    = is_null($request->size)   ? 50   : $request->size;
 
         
         //dd($path);
-	    $img->text($request->nome,$eixoX,$eixoY, function($font) use ($path) {
+	    $img->text($request->nome,$eixoX,$eixoY, function($font) use ($path, $size) {
             
 	    	$font->file($path); 
 			//dd($path);
-			$font->size(50); //defininindo o tamanho como 20
+			$font->size($size); //defininindo o tamanho como 20
 			//dd($font);
 			$font->color('#ffffff'); //definindo a cor como branco
 
@@ -110,6 +111,8 @@ class ImageController extends Controller
                                     'fonts'         => $fontes,
                                     'eixo_x'        => $eixoX, 
                                     'eixo_y'        => $eixoY,
+                                    'size'          => $size,
+                                    'fonte'         => $request->font_id,
                                     'nome'          => $request->nome
                                 ])->with(['message'=>'Cartão gerado com sucesso!']);
     }

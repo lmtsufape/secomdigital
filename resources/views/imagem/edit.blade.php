@@ -25,25 +25,34 @@
 								@csrf							
 							  <div class="form-group">
 							  	<label>Nome:</label>
-							  	<input type="text" name="nome" value="{{ $nome ?? ''  }}" class="form-control">
+							  	<input type="text" name="nome" value="{{ $nome ?? 'Texto'  }}" class="form-control">
 							  	<input type="hidden" name="image_id" value="{{ $imagemOriginal->id }}">
 							  </div>
 							  <div class="form-group">
 							    <label for="exampleFormControlSelect1">Font:</label>
 							    <select class="form-control" name="font_id" id="exampleFormControlSelect1">
+							    @php $fonte = $fonte ?? 1 @endphp
 							    @foreach($fonts as $font)
-							      <option value="{{ $font->id }}" >{{ $font->font_name }}</option>
+							    	@if($fonte == $font->id)
+							      	<option selected value="{{ $font->id }}" >{{ $font->font_name }}</option>
+							      @else
+							      	<option value="{{ $font->id }}" >{{ $font->font_name }}</option>
+							      @endif
 							    @endforeach						      
 							    </select>
 							  </div>
 							  <div class="form-row">
 							    <div class="col-3">
 							  		<label for="formGroupExampleInput">Eixo x:</label>
-							      <input type="text" class="form-control" name="eixo_x" value="{{ $eixo_x ?? '' }}" id="formGroupExampleInput" >
+							      <input type="text" class="form-control" name="eixo_x" value="{{ $eixo_x ?? 1100 }}" id="formGroupExampleInput" >
 							    </div>
 							    <div class="col-3">
 							      <label for="formGroupExampleInput">Eixo y:</label>
-							      <input type="text" class="form-control" name="eixo_y"  value="{{ $eixo_y ?? '' }}" id="formGroupExampleInput" >
+							      <input type="number" class="form-control" name="eixo_y"  value="{{ $eixo_y ?? 100 }}" id="formGroupExampleInput" >
+							    </div>
+							    <div class="col-3">
+							      <label for="formGroupExampleInput">Tamanho:</label>
+							      <input type="number" class="form-control" name="size"  value="{{ $size ?? 50 }}" id="formGroupExampleInput" >
 							    </div>
 							  </div>					  
 							  <div class="form-group" >
