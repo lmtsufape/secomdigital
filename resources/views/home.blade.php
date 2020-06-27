@@ -14,10 +14,7 @@
 									@endforeach
 								</ul>
 							</div>
-						@elseif(session('message'))
-							<div class="alert alert-info">
-								{{ session('message') }}
-							</div>
+						
 						@endif
 
 						<form action="{{ route('image.store') }}" method="POST" enctype="multipart/form-data">
@@ -38,6 +35,11 @@
 			</div>
     </div>
   </section>
+  @if(session('message'))
+		<div class="alert alert-success">
+			{{ session('message') }}
+		</div>
+	@endif
   <div class="album py-5 bg-light">
     <div class="container">
       <div class="row">

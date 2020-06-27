@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Image as Imagem;
+use App\File;
+use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {
@@ -24,8 +26,10 @@ class HomeController extends Controller
      */
     public function index()
     {
+        Storage::disk('public')->delete('temp.jpeg');
+        Imagem::where('title','temp')->delete();
         $images = Imagem::orderBy('created_at', 'desc')->get();
-        //dd($images);
+        
         return view('home', compact('images'));
     }
 }
