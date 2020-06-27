@@ -13,8 +13,8 @@ class UserSeeder extends Seeder
     {
         DB::table('users')->insert([
           'name'=>'Administrador',
-          'email'=>'admin@ufrpe.br',
-          'password'=>Hash::make('12345678'),
+          'email'=>'secom@ufape.edu.br',
+          'password'=>Hash::make('qazwsx@123'),
           'email_verified_at'=>'2020-01-01'
         ]);
     }
