@@ -18,6 +18,13 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <style media="screen">
+        #image-form-wrapper{
+            padding-top: 20px;
+            background: #f7f7f7;
+            
+        }
+    </style>
 </head>
 <body>
     <div id="app">
@@ -76,5 +83,6 @@
             @yield('content')
         </main>
     </div>
+    
 </body>
 </html>

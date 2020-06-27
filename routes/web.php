@@ -19,4 +19,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get(	'/home', 	'HomeController@index')->name('home');
+Route::post('imagem/store', 		'ImageController@store'			)->name('image.store');
+Route::post('imagem/apagar', 		'ImageController@destroy'		)->name('image.destroy');
+Route::get(	'imagem/editar/{id}', 	'ImageController@edit'			)->name('image.edit');
+Route::post('imagem/update', 	'ImageController@update'			)->name('image.update');
+Route::get('imagem/baixar/{id}', 	'ImageController@baixar'		)->name('image.baixar');
+Route::post('imagem/baixarImagem', 	'ImageController@baixarImagem'	)->name('image.baixarImagem');
