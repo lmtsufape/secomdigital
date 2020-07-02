@@ -24,7 +24,7 @@
 						  	<input type="text" name="title" class="form-control">
 						  </div>
 						  <div class="form-group">
-						  	<label> Image </label>
+						  	<label> Imagem </label>
 						  	<input type="file" name="filename">
 						  </div>
 						  <div class="form-group" >
