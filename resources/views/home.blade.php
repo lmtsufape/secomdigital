@@ -51,7 +51,7 @@
 			@foreach($images as $image)
         <div class="col-md-4">
           <div class="card mb-4 shadow-sm">
-            <img height="300" src="{{ $image->src}}" alt="">
+            <img height="300" src="{{ asset($image->src) }}" alt="">
             <div class="card-body">
               <p class="card-text">{{ $image->title }}</p>
               <div class="d-flex justify-content-between align-items-center">

@@ -8,7 +8,7 @@
 				
 					
 					<div class="col-md-8 ">
-						<img height="400" width="600" src="{{ $imagem->src }}" alt="Imagem">
+						<img height="400" width="600" src="{{ asset($imagem->src) }}" alt="Imagem">
 						<form action="{{ route('image.baixarImagem') }}" method="post">
 							@csrf
 							<input type="hidden" name="file" value="{{ $imagem->file }}">

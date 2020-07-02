@@ -62,11 +62,11 @@
 						</form>	
 					</div>
 					<div class="col-md-6 ">
-						<img height="300" width="500" src="{{ $imagemOriginal->src}}" alt="">
+						<img height="300" width="500" src="{{ asset($imagemOriginal->src) }}" alt="">
 					</div>							
 					<div class="col-md-6 ">
 					@if(isset($imagemGerada))
-						<img height="300" width="500" src="{{ $imagemGerada->src}}" alt="">
+						<img height="300" width="500" src="{{ asset($imagemGerada->src) }}" alt="">
 						<div class="btn-group">		                	
 		                	<form action="{{ route('image.baixarImagem') }}" method="post">
 								@csrf
