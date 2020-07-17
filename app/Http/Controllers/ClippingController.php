@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-include_once( __DIR__ . '\..\..\Library\simplehtmldom_1_9_1\simple_html_dom.php');
+include_once('simplehtmldom_1_9_1\simple_html_dom.php');
 
 class ClippingController extends Controller
 
