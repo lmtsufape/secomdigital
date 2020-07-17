@@ -26,3 +26,7 @@ Route::get(	'imagem/editar/{id}', 	'ImageController@edit'			)->name('image.edit'
 Route::post('imagem/update', 	'ImageController@update'			)->name('image.update');
 Route::get('imagem/baixar/{id}', 	'ImageController@baixar'		)->name('image.baixar');
 Route::post('imagem/baixarImagem', 	'ImageController@baixarImagem'	)->name('image.baixarImagem');
+
+//Clipping
+Route::get('clipping/create', 'ClippingController@create')->name('clipping.create');
+Route::post('clipping/gerar', 'ClippingController@gerar')->name('clipping.gerar');
