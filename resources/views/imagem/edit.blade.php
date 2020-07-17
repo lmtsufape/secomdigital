@@ -68,7 +68,7 @@
 					@if(isset($imagemGerada))
 						<img height="300" width="500" src="{{ asset($imagemGerada->src) }}" alt="">
 						<div class="btn-group">		                	
-		                	<form action="{{ route('image.baixarImagem') }}" method="post">
+		                	<form action="{{ route('image.baixarImagem') }}" method="post" enctype="multipart/form-data">
 								@csrf
 								<input type="hidden" name="file" value="{{ $imagemGerada->file }}">
 								<button type="submit" class="btn btn-success mt-3 ">Baixar imagem </button>
