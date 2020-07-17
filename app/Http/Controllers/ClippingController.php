@@ -37,24 +37,35 @@ class ClippingController extends Controller
         $urlBase = "http://ufape.edu.br";
 
         // //notícias do carrossel
-        // $urlNoticias = "http://ufape.edu.br/br";
-        // $html = file_get_html($urlNoticias);
+        $urlNoticias = "http://ufape.edu.br/br";
+        $html = file_get_html($urlNoticias);
 
-        // $content = $html->find('ul[class=slides]',0);
+        $content = $html->find('ul[class=slides]',0);
 
-        // foreach($content->children as $noticia){
-        //     //dd($noticia);
-        //     $fieldTitle = $noticia->find('div[class=views-field views-field-title]',0);
-        //     //dd($fieldTitle);
-        //     $titulo = $fieldTitle->innertext;
-        //     //dd($titulo);
+        foreach($content->children as $noticia){
+            //dd($noticia);
+            $fieldTitle = $noticia->find('div[class=views-field views-field-title]',0);
+            //dd($fieldTitle);
+            $tituloSemTrim = $fieldTitle->innertext;
 
-        //     $fieldUrl = $noticia->find('div[class=field-content]',0);
-        //     $url = $urlBase . $fieldUrl->children[0]->href;
-           
-        //     array_push($noticiasArray, [$titulo, $url]);
+            $titulo = trim($tituloSemTrim);
+            //dd($titulo);
+
+            $fieldUrl = $noticia->find('div[class=field-content]',0);
+            $urlNoticia = $urlBase . $fieldUrl->children[0]->href;
+            $htmlNoticia = file_get_html($urlNoticia);
+
+            $content = $htmlNoticia->find('span[class=submitted]',0);
+            $dataPostagem = $content->innertext;
+            $pos = strpos($dataPostagem, '/');
+            $dataString = substr($dataPostagem, $pos-2, 10);
+            $data = date_create_from_format('j/m/Y', $dataString);  
+            
+            if($data >= $dataInicio && $data <= $dataFinal){
+                array_push($noticiasArray, [$titulo, $urlNoticia]);
+            }    
                      
-        // }
+        }
 
         $urlNoticias = 'http://ufape.edu.br/br/noticias';
 
