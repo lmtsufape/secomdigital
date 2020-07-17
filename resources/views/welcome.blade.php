@@ -17,7 +17,7 @@
               <div class="card-body">
                 <h5 class="card-title">Geração de clipping</h5>
                 <p class="card-text">Sistema para geração automatizada de clipping de notícias a partir do portal da UFAPE.</p>
-                <button disabled="disabled" class="btn btn-primary">Acessar</button> 
+                <a href="{{ route('clipping.create') }}" class="btn btn-primary">Acessar</a> 
               </div>
             </div>
           </div>
