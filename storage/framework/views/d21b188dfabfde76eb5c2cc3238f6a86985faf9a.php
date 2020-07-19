@@ -12,11 +12,11 @@
 									<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 								</ul>
 							</div>
-						
+
 						<?php endif; ?>
 
 						<form action="<?php echo e(route('image.store')); ?>" method="POST" enctype="multipart/form-data">
-							<?php echo csrf_field(); ?>							
+							<?php echo csrf_field(); ?>
 						  <div class="form-group">
 						  	<label>Título</label>
 						  	<input type="text" name="title" class="form-control">
@@ -29,7 +29,7 @@
 						  	<button class="btn btn-success" type="submit">Upload</button>
 						  </div>
 						</form>
-					</div>		
+					</div>
 			</div>
     </div>
   </section>
@@ -48,34 +48,34 @@
       	</div>
       <?php endif; ?>
 			<?php $__currentLoopData = $images; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $image): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-        <div class="col-md-4">
+        <div class="col-md-8">
           <div class="card mb-4 shadow-sm">
             <img height="300" src="<?php echo e(asset($image->src)); ?>" alt="">
             <div class="card-body">
               <p class="card-text"><?php echo e($image->title); ?></p>
               <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-success">Ver</button>
-                  <a href="<?php echo e(route('image.edit', ["id"=>$image->id])); ?>" class="btn btn-sm btn-outline-success">Editar</a>
-                  <button type="button" class="btn btn-sm btn-outline-success">Enviar</button>
+                
+                  <button type="button" class="btn btn-md btn-success">Visualizar imagem base </button>
+                  <a href="<?php echo e(route('image.edit', ["id"=>$image->id])); ?>" class="btn btn-md btn-success">Gerar e enviar cartão de aniversário</a>
+
                   <form action="<?php echo e(route('image.destroy')); ?>" method="post">
                   	<?php echo csrf_field(); ?>
 										<input type="hidden" name="id" value="<?php echo e($image->id); ?>">
-                  	
-                  	<button type="submit" class="btn btn-sm btn-outline-danger">Excluir</button>
+
+                  	<button type="submit" class="btn btn-md btn-danger">Excluir imagem base</button>
                   </form>
-                </div>
-                <small class="text-muted"><?php echo e(date('d/m/Y', strtotime($image->created_at))); ?></small>
+                
+                
               </div>
             </div>
           </div>
-        </div> 
+        </div>
 			<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
       </div>
     </div>
   </div>
-    
+
 </div>
 <?php $__env->stopSection(); ?>
 

@@ -11,10 +11,10 @@
                     <?php echo csrf_field(); ?>
 
                     <label>Data Inicial</label>
-                    <input name="dataInicio" value="13/07/2020">
+                    <input name="dataInicio" placeholder="dd/mm/aaaa">
 
                     <label>Data Final</label>
-                    <input name="dataFinal" value="15/07/2020">
+                    <input name="dataFinal" placeholder="dd/mm/aaaa">
 
                     <button type="submit" class="btn btn-primary">Gerar</button>
                 </form>

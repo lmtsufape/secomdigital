@@ -22,7 +22,7 @@
         #image-form-wrapper{
             padding-top: 20px;
             background: #f7f7f7;
-            
+
         }
     </style>
 </head>
@@ -63,6 +63,14 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                  <a class="dropdown-item" href="{{ route('servidor.index') }}"
+                                     >
+                                      Servidores
+                                  </a>
+                                  <a class="dropdown-item" href="{{ route('home') }}"
+                                     >
+                                      Cartões
+                                  </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -84,6 +92,6 @@
             @yield('content')
         </main>
     </div>
-    
+
 </body>
 </html>

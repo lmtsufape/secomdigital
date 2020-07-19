@@ -12,9 +12,9 @@ use Illuminate\Http\File;
 
 class ImageController extends Controller
 {
-   
+
     // public function index(){
-        
+
     // 	$images = Imagem::orderBy('created_at', 'desc')->get();
     // 	//dd($images);
     // 	return view('home', compact('images'));
@@ -24,7 +24,7 @@ class ImageController extends Controller
     		 'filename'		=> 'required |image | mimes:jpg,jpeg,png,gif,bmp',
 
     	]);
-    	
+
     	$image = new Imagem();
     	$image->title = $request->title;
     	$image->file = $this->uploadFile($request);
@@ -76,40 +76,40 @@ class ImageController extends Controller
 
     	$image   = Imagem::find($request->image_id);
         $fonte   = Font::find($request->font_id);
-        $fontes  = Font::all();   	
-	  	$img     = Image::make(storage_path('app/public/').$image->file);  
+        $fontes  = Font::all();
+	  	$img     = Image::make(storage_path('app/public/').$image->file);
 	    $path    = public_path("font/").$fonte->font_name.".ttf";
-        $eixoX   = is_null($request->eixo_x) ? 1110 : $request->eixo_x;
-        $eixoY   = is_null($request->eixo_y) ? 100  : $request->eixo_y;
-        $size    = is_null($request->size)   ? 50   : $request->size;
+        $eixoX   = is_null($request->eixo_x) ? 4100 : $request->eixo_x;
+        $eixoY   = is_null($request->eixo_y) ? 400  : $request->eixo_y;
+        $size    = is_null($request->size)   ? 250   : $request->size;
 
-        
+
         //dd($path);
 	    $img->text($request->nome,$eixoX,$eixoY, function($font) use ($path, $size) {
-            
-	    	$font->file($path); 
-			//dd($path);
-			$font->size($size); //defininindo o tamanho como 20
-			//dd($font);
-			$font->color('#ffffff'); //definindo a cor como branco
+  	    $font->file($path);
+  			//dd($path);
+  			$font->size($size); //defininindo o tamanho como 20
+  			//dd($font);
+  			$font->color('#ffffff'); //definindo a cor como branco
 
-			$font->align('right'); //definindo o alinhamento como centralizado
+  			$font->align('right'); //definindo o alinhamento como centralizado
 
-		});
+  		});
 
 		$imagemGerada = new Imagem();
 		$imagemGerada->title = 'temp';
 	    $imagemGerada->file = 'temp'.'.'.$img->extension;
 	    $imagemGerada->save();
+      $imagemGerada->path = storage_path('app/public/').$imagemGerada->file;
 	    $img->save(storage_path('app/public/').$imagemGerada->file);
-	    
+
 	    //return redirect()->back();
-     	//return redirect()->route('image.baixar', ['id'=>$imagemGerada->id]); 
+     	//return redirect()->route('image.baixar', ['id'=>$imagemGerada->id]);
      	return view('imagem.edit', [
                                     'imagemOriginal'=> $image ,
                                     'imagemGerada'  => $imagemGerada,
                                     'fonts'         => $fontes,
-                                    'eixo_x'        => $eixoX, 
+                                    'eixo_x'        => $eixoX,
                                     'eixo_y'        => $eixoY,
                                     'size'          => $size,
                                     'fonte'         => $request->font_id,
@@ -122,9 +122,11 @@ class ImageController extends Controller
     	$imagem = Imagem::find($id);
     	return view('imagem.baixar', compact('imagem'));
     }
-    public function baixarImagem(Request $request){  
+    public function baixarImagem(Request $request){
 
       return response()->download(storage_path('app/public/' . $request->file));
   	}
+
+
 
 }

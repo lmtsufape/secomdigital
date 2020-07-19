@@ -22,7 +22,7 @@
         #image-form-wrapper{
             padding-top: 20px;
             background: #f7f7f7;
-            
+
         }
     </style>
 </head>
@@ -59,6 +59,14 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                  <a class="dropdown-item" href="<?php echo e(route('servidor.index')); ?>"
+                                     >
+                                      Servidores
+                                  </a>
+                                  <a class="dropdown-item" href="<?php echo e(route('home')); ?>"
+                                     >
+                                      Cartões
+                                  </a>
                                     <a class="dropdown-item" href="<?php echo e(route('logout')); ?>"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -81,7 +89,7 @@
             <?php echo $__env->yieldContent('content'); ?>
         </main>
     </div>
-    
+
 </body>
 </html>
 <?php /**PATH /home/vagrant/code/Mensagens/resources/views/layouts/app.blade.php ENDPATH**/ ?>

@@ -14,11 +14,11 @@
 									@endforeach
 								</ul>
 							</div>
-						
+
 						@endif
 
 						<form action="{{ route('image.store') }}" method="POST" enctype="multipart/form-data">
-							@csrf							
+							@csrf
 						  <div class="form-group">
 						  	<label>Título</label>
 						  	<input type="text" name="title" class="form-control">
@@ -31,7 +31,7 @@
 						  	<button class="btn btn-success" type="submit">Upload</button>
 						  </div>
 						</form>
-					</div>		
+					</div>
 			</div>
     </div>
   </section>
@@ -49,33 +49,33 @@
       	</div>
       @endif
 			@foreach($images as $image)
-        <div class="col-md-4">
+        <div class="col-md-8">
           <div class="card mb-4 shadow-sm">
             <img height="300" src="{{ asset($image->src) }}" alt="">
             <div class="card-body">
               <p class="card-text">{{ $image->title }}</p>
               <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-success">Ver</button>
-                  <a href="{{ route('image.edit', ["id"=>$image->id]) }}" class="btn btn-sm btn-outline-success">Editar</a>
-                  <button type="button" class="btn btn-sm btn-outline-success">Enviar</button>
+                {{-- <div class="btn-group"> --}}
+                  <button type="button" class="btn btn-md btn-success">Visualizar imagem base </button>
+                  <a href="{{ route('image.edit', ["id"=>$image->id]) }}" class="btn btn-md btn-success">Gerar e enviar cartão de aniversário</a>
+
                   <form action="{{ route('image.destroy') }}" method="post">
                   	@csrf
 										<input type="hidden" name="id" value="{{ $image->id }}">
-                  	
-                  	<button type="submit" class="btn btn-sm btn-outline-danger">Excluir</button>
+
+                  	<button type="submit" class="btn btn-md btn-danger">Excluir imagem base</button>
                   </form>
-                </div>
-                <small class="text-muted">{{ date('d/m/Y', strtotime($image->created_at)) }}</small>
+                {{-- </div> --}}
+                {{-- <small class="text-muted">{{ date('d/m/Y', strtotime($image->created_at)) }}</small> --}}
               </div>
             </div>
           </div>
-        </div> 
+        </div>
 			@endforeach
 
       </div>
     </div>
   </div>
-    
+
 </div>
 @endsection
