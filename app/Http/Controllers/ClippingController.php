@@ -20,8 +20,9 @@ class ClippingController extends Controller
         $noticias = $this->gerarNoticias($dataInicio, $dataFinal);
         $comunicados = $this->gerarComunicados($dataInicio, $dataFinal);
         $agenda = $this->gerarAgenda($dataInicio, $dataFinal);
+        $editais = $this->gerarEditais($dataInicio, $dataFinal);
 
-        $textoArray = [[$noticias,"Notícias"], [$comunicados, "Comunicados"], [$agenda, "Agenda"]];
+        $textoArray = [[$noticias,"Notícias"], [$comunicados, "Comunicados"], [$agenda, "Agenda"], [$editais, "Editais e Seleções"]];
 
         return view('clipping.show', ['textoArray'  => $textoArray, 
                                        'dataInicio' => $request->dataInicio,
@@ -59,7 +60,7 @@ class ClippingController extends Controller
             $dataPostagem = $content->innertext;
             $pos = strpos($dataPostagem, '/');
             $dataString = substr($dataPostagem, $pos-2, 10);
-            $data = date_create_from_format('j/m/Y', $dataString);  
+            $data = date_create_from_format('j/m/Y H:i:s', $dataString . "00:00:00");  
             
             if($data >= $dataInicio && $data <= $dataFinal){
                 array_push($noticiasArray, [$titulo, $urlNoticia]);
@@ -83,8 +84,8 @@ class ClippingController extends Controller
             $fieldData = $noticia->find('div[class=views-field views-field-created]',0);
             $dataComHora = $fieldData->children[0]->innertext;
             $dataString = substr($dataComHora, 0, 10);
-            $data = date_create_from_format('j/m/Y', $dataString);  
-            
+            $data = date_create_from_format('j/m/Y H:i:s', ($dataString . "00:00:00"));  
+           // dd($data, $dataInicio, $dataFinal);
             if($data >= $dataInicio && $data <= $dataFinal){
                 array_push($noticiasArray, [$titulo, $url]);
             }           
@@ -159,6 +160,39 @@ class ClippingController extends Controller
         }
 
         return $agendaArray;
+    }
+
+    public function gerarEditais($dataInicio, $dataFinal){
+        $dataInicio = date_create_from_format('j/m/Y H:i:s', $dataInicio);
+        $dataFinal = date_create_from_format('j/m/Y H:i:s', $dataFinal); 
+
+        $urlBase = "http://ufape.edu.br";
+        $urlComunicados = 'http://ufape.edu.br/br/editais-e-selecoes';
+
+        $html = file_get_html($urlComunicados);
+        
+        //encontra div com conjunto de notícias
+        $content = $html->find('div[class=view-content]',0);
+        
+        $comunicadosArray = [];
+        foreach($content->children as $comunicado){
+            //dd($comunicado);
+            $fieldTitle = $comunicado->find('div[class=views-field views-field-title]',0);
+            $titulo = $fieldTitle->children[0]->children[0]->innertext;
+            $url = $urlBase . $fieldTitle->children[0]->children[0]->href;
+
+            $fieldData = $comunicado->find('div[class=views-field views-field-created]',0);
+            $dataComHora = $fieldData->children[0]->innertext;
+            $dataString = substr($dataComHora, 0, 10);
+            $data = date_create_from_format('j/m/Y', $dataString);  
+            
+            if($data >= $dataInicio && $data <= $dataFinal){
+                array_push($comunicadosArray, [$titulo, $url]);
+            }           
+            
+        }
+
+        return $comunicadosArray;
     }
 
     public function formatarTexto($textoArray){
