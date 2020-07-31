@@ -9,6 +9,11 @@ include_once('simplehtmldom_1_9_1/simple_html_dom.php');
 class ClippingController extends Controller
 
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function create(){
     	return view('clipping.create');
     }
