@@ -35,7 +35,7 @@
                         
                         @foreach($categoria[0] as $publicacao)
                             <b>{{ $publicacao[0] }}</b> - 
-                            <a href="{{ $publicacao[1] }}"> {{ $publicacao[1] }}</a><br><br>
+                            <a class="link" href="{{ $publicacao[1] }}"> {{ $publicacao[1] }}</a><br><br>
                         @endforeach
                         
                     @endforeach
