@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('style')
+<link href="{{ asset('css/clipping.css') }}" rel="stylesheet">
+@endsection
+
 @section('content')
 <div class="container">
         <div class="row">
@@ -27,7 +31,7 @@
                     @php $resultado = ""; @endphp 
                     
                     @foreach($textoArray as $categoria)
-                        <h4> {{ $categoria[1] }} </h4>
+                        <h4><font face="arial, sans-serif"><b style="">{{ $categoria[1] }}</b></font> </h4>
                         
                         @foreach($categoria[0] as $publicacao)
                             <b>{{ $publicacao[0] }}</b> - 
