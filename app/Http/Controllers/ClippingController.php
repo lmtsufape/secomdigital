@@ -149,9 +149,17 @@ class ClippingController extends Controller
             $titulo = $fieldTitle->children[0]->children[0]->innertext;
             $url = $urlBase . $fieldTitle->children[0]->children[0]->href;
 
-            $fieldData = $evento->find('div[class=views-field views-field-field-data]',0);            
-            $dataString = $fieldData->children[0]->children[0]->innertext;            
-            $data = date_create_from_format('j/m/Y', $dataString);  
+            $htmlEvento = file_get_html($url);
+            //encontra div com conjunto de notícias
+            $contentEvento = $htmlEvento->find('div[class=field field-name-post-date field-type-ds field-label-hidden]',0);
+            $data = $contentEvento->children[0]->children[0];
+
+            dd($data->innertext);
+
+            // $fieldData = $evento->find('div[class=views-field views-field-field-data]',0);            
+            // $dataString = $fieldData->children[0]->children[0]->innertext;            
+            // $data = date_create_from_format('j/m/Y', $dataString); 
+
             
             if($data >= $dataInicio && $data <= $dataFinal){
                 array_push($agendaArray, [$titulo, $url]);
