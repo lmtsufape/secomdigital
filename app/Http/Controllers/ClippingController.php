@@ -21,7 +21,7 @@ class ClippingController extends Controller
         $comunicados = $this->gerarComunicados($dataInicio, $dataFinal);
         $agenda = $this->gerarAgenda($dataInicio, $dataFinal);
         $editais = $this->gerarEditais($dataInicio, $dataFinal);
-
+        
         $textoArray = [[$noticias,"Notícias"], [$comunicados, "Comunicados"], [$agenda, "Agenda"], [$editais, "Editais e Seleções"]];
 
         return view('clipping.show', ['textoArray'  => $textoArray, 
@@ -154,12 +154,18 @@ class ClippingController extends Controller
             $contentEvento = $htmlEvento->find('div[class=field field-name-post-date field-type-ds field-label-hidden]',0);
             $data = $contentEvento->children[0]->children[0];
 
-            dd($data->innertext);
+            $data = explode(", ", $data->innertext);
+            list($dia, $mesString) = explode(" ", $data[1]);
+            $ano = substr($data[2], 0, 4);
 
-            // $fieldData = $evento->find('div[class=views-field views-field-field-data]',0);            
-            // $dataString = $fieldData->children[0]->children[0]->innertext;            
-            // $data = date_create_from_format('j/m/Y', $dataString); 
+            //dd($dia, $mes, $ano);
 
+            $meses = array("Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro");
+            $mes = array_search($mesString, $meses)+1;
+            
+            $dataString = $dia . '/' . $mes . '/' . $ano;
+            $data = date_create_from_format('j/m/Y', $dataString); 
+            //dd($data);
             
             if($data >= $dataInicio && $data <= $dataFinal){
                 array_push($agendaArray, [$titulo, $url]);
