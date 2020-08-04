@@ -31,7 +31,11 @@
                     @php $resultado = ""; @endphp 
                     
                     @foreach($textoArray as $categoria)
-                        <h4><font face="arial, sans-serif"><b style="">{{ $categoria[1] }}</b></font> </h4>
+                        <font face="arial, sans-serif" style="box-sizing:border-box" size="4">
+                          <h4 class="titulo" style="box-sizing:border-box">
+                            <b>{{ $categoria[1] }}</b>
+                          </h4>
+                        </font> 
                         
                         @foreach($categoria[0] as $publicacao)
                             <b>{{ $publicacao[0] }}</b> - 

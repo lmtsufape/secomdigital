@@ -22,12 +22,13 @@ class ClippingController extends Controller
         $dataInicio = $request->dataInicio . " 00:00:00"; 
         $dataFinal = $request->dataFinal . " 23:59:59";
 
-        $noticias = $this->gerarNoticias($dataInicio, $dataFinal);
-        $comunicados = $this->gerarComunicados($dataInicio, $dataFinal);
+        //$noticias = $this->gerarNoticias($dataInicio, $dataFinal);
+        //$comunicados = $this->gerarComunicados($dataInicio, $dataFinal);
         $agenda = $this->gerarAgenda($dataInicio, $dataFinal);
-        $editais = $this->gerarEditais($dataInicio, $dataFinal);
-        
-        $textoArray = [[$noticias,"Notícias"], [$comunicados, "Comunicados"], [$agenda, "Agenda"], [$editais, "Editais e Seleções"]];
+        //$editais = $this->gerarEditais($dataInicio, $dataFinal);
+        $textoArray = [[$agenda, "Agenda"]];
+
+        //$textoArray = [[$noticias,"Notícias"], [$comunicados, "Comunicados"], [$agenda, "Agenda"], [$editais, "Editais e Seleções"]];
 
         return view('clipping.show', ['textoArray'  => $textoArray, 
                                        'dataInicio' => $request->dataInicio,
@@ -49,13 +50,14 @@ class ClippingController extends Controller
         $content = $html->find('ul[class=slides]',0);
 
         foreach($content->children as $noticia){
-            //dd($noticia);
+            //dd($noticia);            
+
             $fieldTitle = $noticia->find('div[class=views-field views-field-title]',0);
             //dd($fieldTitle);
             $tituloSemTrim = $fieldTitle->innertext;
 
             $titulo = trim($tituloSemTrim);
-            //dd($titulo);
+            //dd($titulo);            
 
             $fieldUrl = $noticia->find('div[class=field-content]',0);
             $urlNoticia = $urlBase . $fieldUrl->children[0]->href;
@@ -150,8 +152,11 @@ class ClippingController extends Controller
         $agendaArray = [];
         foreach($lista->children as $evento){
             //dd($evento);
+            $dataField = $evento->find('div[class=views-field views-field-field-data]', 0);
+            $dataEvento = $dataField->children[0]->children[0]->innertext;
+
             $fieldTitle = $evento->find('div[class=views-field views-field-title]',0);
-            $titulo = $fieldTitle->children[0]->children[0]->innertext;
+            $titulo = $dataEvento . " às " . $fieldTitle->children[0]->children[0]->innertext;
             $url = $urlBase . $fieldTitle->children[0]->children[0]->href;
 
             $htmlEvento = file_get_html($url);
