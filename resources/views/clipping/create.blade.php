@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('style')
+<link href="{{ asset('css/clipping.create.css') }}" rel="stylesheet">
+@endsection
+
 @section('content')
 <div class="container">
         <div class="row">
@@ -22,17 +26,19 @@
                     <br>
 
                     <div id="paginasNovas">
-                      <p>Inserir em <b>"Páginas novas, atualizadas ou destaques"</b></p>
-                      <label>Título da postagem</label>
-                      <input name="titulo[]">
-                      <label>Link</label>
-                      <input name="link[]">
-
+                      <div class="campo">
+                        <p><b>"Páginas novas, atualizadas ou destaques"</b></p>
+                        <label>Título da postagem</label>
+                        <input name="titulo[]">
+                        <label>Link</label>
+                        <input name="link[]">
+                        <img src="{{asset('img/x-circle.svg')}}" onclick="removerCampo(this)">
+                        <br>
+                      </div>
                     </div>
-                      <a href="#" onclick="addCampo()" class="btn btn-primary" id="addCoautor">Adicionar participante</a>
-                      <a href='#' onclick="removerCampo()" class="btn btn-danger mt-2 mb-2 delete">Remover participante</a>
-
-                      <button type="submit" class="btn btn-primary">Gerar</button>
+                      <a href="#" onclick="addCampo()" class="btn btn-primary" id="addCoautor">Adicionar campo</a>
+                     
+                      <button type="submit" class="btn btn-primary">Gerar Clipping</button>
                 </form>
               </div>
             </div>
@@ -47,6 +53,9 @@
   function addCampo(){
     paginasNovas = document.getElementById('paginasNovas');
     
+    divCampo = document.createElement("div");
+    divCampo.setAttribute('class', 'campo');
+
     titulo = document.createElement("LABEL");
     titulo.innerHTML = "Título da postagem";
     tituloInput = document.createElement("INPUT");
@@ -54,21 +63,24 @@
     link = document.createElement("LABEL");
     link.innerHTML = "Link";
     linkInput = document.createElement("INPUT")
-    linkInput.setAttribute('name', 'link[]');;
+    linkInput.setAttribute('name', 'link[]');
+    img = document.createElement("IMG");
+    img.setAttribute('src', "{{asset('img/x-circle.svg')}}");
+    img.setAttribute('onclick', "removerCampo(this)");
+    br = document.createElement("BR");
 
-    paginasNovas.appendChild(titulo);
-    paginasNovas.appendChild(tituloInput);
-    paginasNovas.appendChild(link);
-    paginasNovas.appendChild(linkInput);      
+    divCampo.appendChild(titulo);
+    divCampo.appendChild(tituloInput);
+    divCampo.appendChild(link);
+    divCampo.appendChild(linkInput);
+    divCampo.appendChild(img);
+    divCampo.appendChild(br);      
+    paginasNovas.appendChild(divCampo);
   }
 
-  function removerCampo(){
-    paginasNovas = document.getElementById('paginasNovas');
-    
-    for(i = 0; i < 4; i++){
-      length = paginasNovas.childNodes.length;
-      paginasNovas.removeChild(paginasNovas.childNodes[length-1]);         
-    }
+  function removerCampo(img){
+    campo = img.parentNode;
+    campo.parentNode.removeChild(campo);
   }
 
 </script>
