@@ -19,6 +19,14 @@ class ClippingController extends Controller
     }
 
     public function gerar(Request $request){
+        //dd($request);
+        $request->validate([
+            'dataInicio'       => ['required', 'date_format:d/m/Y'],
+            'dataFinal'        => ['required', 'date_format:d/m/Y'],
+            'titulo.*'         => ['required_with:link.*'],
+            'link.*'           => ['required_with:titulo.*'],
+        ]);
+  
         $dataInicio = $request->dataInicio . " 00:00:00"; 
         $dataFinal = $request->dataFinal . " 23:59:59";
 
@@ -27,13 +35,16 @@ class ClippingController extends Controller
         //$agenda = $this->gerarAgenda($dataInicio, $dataFinal);
         //$editais = $this->gerarEditais($dataInicio, $dataFinal);
         $novas = $this->gerarNovas($request->titulo, $request->link);
-        $textoArray = [[$novas, "Novas"]];
+        $textoArray = [ [$novas, "Páginas novas, atualizadas ou destaques"]];
 
         //$textoArray = [[$noticias,"Notícias"], [$comunicados, "Comunicados"], [$agenda, "Agenda"], [$editais, "Editais e Seleções"]];
 
         return view('clipping.show', ['textoArray'  => $textoArray, 
                                        'dataInicio' => $request->dataInicio,
-                                       'dataFinal'  => $request->dataFinal]);
+                                       'dataFinal'  => $request->dataFinal,
+                                       'countCampos'  => $request->countCampos,
+                                       'titulo'     => $request->titulo,
+                                       'link'       => $request->link]);
     }
 
     public function gerarNoticias($dataInicio, $dataFinal){
@@ -224,7 +235,9 @@ class ClippingController extends Controller
         $novasArray = [];
         
         for($i = 0; $i < sizeof($titulo); $i++){
-            array_push($novasArray, [$titulo[$i], $link[$i]]);
+            if($titulo[$i] !== '' && $link[$i]){
+                array_push($novasArray, [$titulo[$i], $link[$i]]);
+            }
         }
 
         return $novasArray;

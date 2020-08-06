@@ -17,28 +17,66 @@
                     @csrf
                     <div>
                       <label>Data Inicial</label>
-                      <input name="dataInicio" placeholder="dd/mm/aaaa">
-
+                      <input name="dataInicio" placeholder="dd/mm/aaaa" required class="@error('dataInicio') is-invalid @enderror" value="{{old('dataInicio')}}">
+                      
                       <label>Data Final</label>
-                      <input name="dataFinal" placeholder="dd/mm/aaaa">
+                      <input name="dataFinal" placeholder="dd/mm/aaaa" required class="@error('dataFinal') is-invalid @enderror" value="{{old('dataFinal')}}">
+                     
+                      
+                      @if(!$errors->has('dataFinal') && $errors->has('dataInicio'))
+                        @error('dataInicio')
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                        @enderror
+                      @endif
+                      @error('dataFinal')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                      @enderror
                     </div>
                     
                     <br>
 
                     <div id="paginasNovas">
-                      <div class="campo">
-                        <p><b>"Páginas novas, atualizadas ou destaques"</b></p>
-                        <label>Título da postagem</label>
-                        <input name="titulo[]">
-                        <label>Link</label>
-                        <input name="link[]">
-                        <img src="{{asset('img/x-circle.svg')}}" onclick="removerCampo(this)">
-                        <br>
-                      </div>
+                      <p><b>"Páginas novas, atualizadas ou destaques"</b></p>
+                      @php $countCampos = 1; @endphp
+                      @if(old('countCampos') != null)
+                        @php $countCampos = old('countCampos') @endphp
+                      @endif
+
+                      @if ($countCampos != null && $countCampos > 0)
+                        @for ($i = 0; $i < $countCampos; $i++)
+                        <div class="campo">                        
+                          <label>Título da postagem</label>
+                          <input name="titulo[]" class="@error('titulo.' . $i) is-invalid @enderror" value="{{old('titulo.' . $i)}}">                       
+
+                          <label>Link</label>
+                          <input name="link[]" class="@error('link.' . $i) is-invalid @enderror" value="{{old('link.' . $i)}}">
+                          
+                          <img src="{{asset('img/x-circle.svg')}}" id="removerCampo" onclick="removerCampo(this)">
+
+                          @error('titulo.' . $i)
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                          @enderror
+                          @error('link.' . $i)
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                          @enderror
+                          <br>
+                        </div>
+                        @endfor
+                      @endif                      
                     </div>
-                      <a href="#" onclick="addCampo()" class="btn btn-primary" id="addCoautor">Adicionar campo</a>
-                     
-                      <button type="submit" class="btn btn-primary">Gerar Clipping</button>
+                    <img src="{{asset('img/plus-circle.svg')}}" id="addCampo" onclick="addCampo()">
+                    
+                    <input type="hidden" name="countCampos" id="countCampos" value="{{ old('countCampos') != null ? old('countCampos') : 1}}">
+                    <br>
+                    <button type="submit" class="btn btn-primary">Gerar Clipping</button>
                 </form>
               </div>
             </div>
@@ -76,11 +114,16 @@
     divCampo.appendChild(img);
     divCampo.appendChild(br);      
     paginasNovas.appendChild(divCampo);
+
+    var countCampos = document.getElementById('countCampos');
+    countCampos.value = parseInt(countCampos.value) + 1;
   }
 
   function removerCampo(img){
     campo = img.parentNode;
     campo.parentNode.removeChild(campo);
+    var countCampos = document.getElementById('countCampos');
+    countCampos.value = parseInt(countCampos.value) - 1;
   }
 
 </script>
