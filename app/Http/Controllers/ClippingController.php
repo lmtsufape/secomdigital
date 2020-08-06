@@ -24,9 +24,10 @@ class ClippingController extends Controller
 
         //$noticias = $this->gerarNoticias($dataInicio, $dataFinal);
         //$comunicados = $this->gerarComunicados($dataInicio, $dataFinal);
-        $agenda = $this->gerarAgenda($dataInicio, $dataFinal);
+        //$agenda = $this->gerarAgenda($dataInicio, $dataFinal);
         //$editais = $this->gerarEditais($dataInicio, $dataFinal);
-        $textoArray = [[$agenda, "Agenda"]];
+        $novas = $this->gerarNovas($request->titulo, $request->link);
+        $textoArray = [[$novas, "Novas"]];
 
         //$textoArray = [[$noticias,"Notícias"], [$comunicados, "Comunicados"], [$agenda, "Agenda"], [$editais, "Editais e Seleções"]];
 
@@ -217,6 +218,16 @@ class ClippingController extends Controller
         }
 
         return $comunicadosArray;
+    }
+
+    public function gerarNovas($titulo, $link){
+        $novasArray = [];
+        
+        for($i = 0; $i < sizeof($titulo); $i++){
+            array_push($novasArray, [$titulo[$i], $link[$i]]);
+        }
+
+        return $novasArray;
     }
 
     public function formatarTexto($textoArray){
