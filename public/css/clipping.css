@@ -22,3 +22,23 @@ body {
     text-decoration-style: initial;
     text-decoration-color: initial;
 }
+
+#formGerar {
+    width: 60%;
+}
+
+#delCampo {    
+    margin-top: 15px;
+}
+
+#dataFinal {
+    margin-left: 4%;
+}
+
+#imgCampo {
+    margin-right: 12%;
+}
+
+#gerar {
+    width: 87%;
+}

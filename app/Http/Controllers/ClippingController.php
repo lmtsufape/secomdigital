@@ -30,15 +30,21 @@ class ClippingController extends Controller
         $dataInicio = $request->dataInicio . " 00:00:00"; 
         $dataFinal = $request->dataFinal . " 23:59:59";
 
-        //$noticias = $this->gerarNoticias($dataInicio, $dataFinal);
-        //$comunicados = $this->gerarComunicados($dataInicio, $dataFinal);
-        //$agenda = $this->gerarAgenda($dataInicio, $dataFinal);
-        //$editais = $this->gerarEditais($dataInicio, $dataFinal);
+        $noticias = $this->gerarNoticias($dataInicio, $dataFinal);
+        $comunicados = $this->gerarComunicados($dataInicio, $dataFinal);
+        $agenda = $this->gerarAgenda($dataInicio, $dataFinal);
+        $editais = $this->gerarEditais($dataInicio, $dataFinal);
         $novas = $this->gerarNovas($request->titulo, $request->link);
-        $textoArray = [ [$novas, "Páginas novas, atualizadas ou destaques"]];
+        // $textoArray = [ [$novas, "Páginas novas, atualizadas ou destaques"]];
 
-        //$textoArray = [[$noticias,"Notícias"], [$comunicados, "Comunicados"], [$agenda, "Agenda"], [$editais, "Editais e Seleções"]];
-
+        if(count($novas) > 0){
+            $textoArray = [[$noticias,"Notícias"], [$comunicados, "Comunicados"], [$agenda, "Agenda"],
+                         [$editais, "Editais e Seleções"], [$novas, "Páginas novas, atualizadas ou destaques"]];
+        }else{
+            $textoArray = [[$noticias,"Notícias"], [$comunicados, "Comunicados"], [$agenda, "Agenda"],
+                         [$editais, "Editais e Seleções"]];
+        }
+        
         return view('clipping.show', ['textoArray'  => $textoArray, 
                                        'dataInicio' => $request->dataInicio,
                                        'dataFinal'  => $request->dataFinal,
