@@ -1,0 +1,44 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-variant-ligatures: normal;
+    font-variant-caps: normal;
+    font-variant-numeric: normal;
+    font-variant-east-asian: normal;
+    font-weight: normal;
+    font-stretch: normal;
+    font-size: small;
+    line-height: 1.5;
+    letter-spacing: normal;
+}
+
+.titulo{
+    font-size: large;
+}
+
+.link{
+    color: #15c;
+    text-decoration-line: underline;
+    text-decoration-style: initial;
+    text-decoration-color: initial;
+}
+
+#formGerar {
+    width: 60%;
+}
+
+#delCampo {    
+    margin-top: 15px;
+}
+
+#dataFinal {
+    margin-left: 4%;
+}
+
+#imgCampo {
+    margin-right: 12%;
+}
+
+#gerar {
+    width: 87%;
+}
