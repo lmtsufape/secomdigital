@@ -113,8 +113,10 @@
                         </font> 
                         
                         @foreach($categoria[0] as $publicacao)
+                          @if(isset($publicacao[0]) && isset($publicacao[1]))
                             <b>{{ $publicacao[0] }}</b> - 
                             <a class="link" href="{{ $publicacao[1] }}"> {{ $publicacao[1] }}</a><br><br>
+                          @endif
                         @endforeach
                         
                     @endforeach
@@ -135,20 +137,16 @@
     
     divCampo = document.createElement("div");
     divCampo.setAttribute('class', 'campo row d-flex justify-content-between');
-
     divTitulo = document.createElement("div");
     divTitulo.setAttribute('class', 'col-sm-5');
-
     titulo = document.createElement("LABEL");
     titulo.innerHTML = "Título da postagem";
     tituloInput = document.createElement("INPUT");
     tituloInput.setAttribute('name', 'titulo[]');
     tituloInput.setAttribute('class', "form-control @error('titulo.' . $i) is-invalid @enderror");
-
     divTitulo.appendChild(titulo);
     divTitulo.appendChild(tituloInput);
     divCampo.appendChild(divTitulo);
-
     divRight = document.createElement("div");
     divRight.setAttribute('class', 'col-sm-6');
     divRow = document.createElement("div");
@@ -161,41 +159,31 @@
     linkInput = document.createElement("INPUT")
     linkInput.setAttribute('name', 'link[]');
     linkInput.setAttribute('class', "form-control @error('link.' . $i) is-invalid @enderror");
-
-
     divLink.appendChild(link);
     divLink.appendChild(linkInput);
     divRow.appendChild(divLink);
-
     divImg = document.createElement("div");
     divImg.setAttribute('class', 'col-sm-2');
-
     img = document.createElement("IMG");
     img.setAttribute('src', "{{asset('img/x-circle.svg')}}");
     img.setAttribute('onclick', "removerCampo(this)");
     img.setAttribute('style', "margin-top: 30px;");
     
     br = document.createElement("BR");
-
     divImg.appendChild(br);
     divImg.appendChild(img);
     divRow.appendChild(divImg);
-
     divRight.appendChild(divRow);
     divCampo.appendChild(divRight);
-
     divCampo.appendChild(br);      
     paginasNovas.appendChild(divCampo);
-
     var countCampos = document.getElementById('countCampos');
     countCampos.value = parseInt(countCampos.value) + 1;
   }
-
   function removerCampo(img){
     campo = img.parentNode.parentNode.parentNode.parentNode;
     campo.parentNode.removeChild(campo);
     var countCampos = document.getElementById('countCampos');
     countCampos.value = parseInt(countCampos.value) - 1;
   }
-
 </script>
