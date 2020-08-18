@@ -35,7 +35,9 @@ class ClippingController extends Controller
         $agenda = $this->gerarAgenda($dataInicio, $dataFinal);
         $editais = $this->gerarEditais($dataInicio, $dataFinal);
         $novas = $this->gerarNovas($request->titulo, $request->link);
-        // $textoArray = [ [$novas, "Páginas novas, atualizadas ou destaques"]];
+        //  $textoArray = [ [$noticias,"Notícias"]];
+
+        // $textoArray = [[$editais, "Editais e Seleções"]];
 
         if(count($novas) > 0){
             $textoArray = [[$noticias,"Notícias"], [$comunicados, "Comunicados"], [$agenda, "Agenda"],
@@ -63,10 +65,16 @@ class ClippingController extends Controller
 
         // //notícias do carrossel
         $urlNoticias = "http://ufape.edu.br/br";
-        $html = file_get_html($urlNoticias);
+        $html = curl_init($urlNoticias);
+        curl_setopt($html, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($html, CURLOPT_BINARYTRANSFER, true);
+        $conteudo = curl_exec($html);
+        curl_close($html);
 
+        $html =  str_get_html($conteudo);
         $content = $html->find('ul[class=slides]',0);
 
+        $count = 0;
         foreach($content->children as $noticia){
             //dd($noticia);            
 
@@ -75,11 +83,21 @@ class ClippingController extends Controller
             $tituloSemTrim = $fieldTitle->innertext;
 
             $titulo = trim($tituloSemTrim);
+            $titulo = str_replace('&quot;', '"', $titulo);
             //dd($titulo);            
 
             $fieldUrl = $noticia->find('div[class=field-content]',0);
             $urlNoticia = $urlBase . $fieldUrl->children[0]->href;
-            $htmlNoticia = file_get_html($urlNoticia);
+
+            //$htmlNoticia = file_get_html($urlNoticia);
+           
+            $htmlNoticia = curl_init($urlNoticia);
+            curl_setopt($htmlNoticia, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($htmlNoticia, CURLOPT_BINARYTRANSFER, true);
+            $conteudo = curl_exec($htmlNoticia);
+            curl_close($htmlNoticia);
+
+            $htmlNoticia =  str_get_html($conteudo);
 
             $content = $htmlNoticia->find('span[class=submitted]',0);
             $dataPostagem = $content->innertext;
@@ -89,13 +107,22 @@ class ClippingController extends Controller
             
             if($data >= $dataInicio && $data <= $dataFinal){
                 array_push($noticiasArray, [$titulo, $urlNoticia]);
+                $count++;
             }    
                      
         }
 
         $urlNoticias = 'http://ufape.edu.br/br/noticias';
 
-        $html = file_get_html($urlNoticias);
+        //$html = file_get_html($urlNoticias);
+        
+        $html = curl_init($urlNoticias);
+        curl_setopt($html, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($html, CURLOPT_BINARYTRANSFER, true);
+        $conteudo = curl_exec($html);
+        curl_close($html);
+
+        $html =  str_get_html($conteudo);
         
         //encontra div com conjunto de notícias
         $content = $html->find('div[class=view-content]',0);
@@ -104,6 +131,7 @@ class ClippingController extends Controller
             //dd($noticia);
             $fieldTitle = $noticia->find('div[class=views-field views-field-title]',0);
             $titulo = $fieldTitle->children[0]->children[0]->innertext;
+            $titulo = str_replace('&quot;', '"', $titulo);
             $url = $urlBase . $fieldTitle->children[0]->children[0]->href;
 
             $fieldData = $noticia->find('div[class=views-field views-field-created]',0);
@@ -113,11 +141,12 @@ class ClippingController extends Controller
            // dd($data, $dataInicio, $dataFinal);
             if($data >= $dataInicio && $data <= $dataFinal){
                 array_push($noticiasArray, [$titulo, $url]);
+                $count++;
             }           
         }
 
         //dd($noticiasArray);
-
+        array_push($noticiasArray, $count);
         return $noticiasArray;
     }
 
@@ -128,16 +157,25 @@ class ClippingController extends Controller
         $urlBase = "http://ufape.edu.br";
         $urlComunicados = 'http://ufape.edu.br/br/comunicados';
 
-        $html = file_get_html($urlComunicados);
+        //$html = file_get_html($urlComunicados);
+        $html = curl_init($urlComunicados);
+        curl_setopt($html, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($html, CURLOPT_BINARYTRANSFER, true);
+        $conteudo = curl_exec($html);
+        curl_close($html);
+
+        $html =  str_get_html($conteudo);
         
         //encontra div com conjunto de notícias
         $content = $html->find('div[class=view-content]',0);
         
         $comunicadosArray = [];
+        $count = 0;
         foreach($content->children as $comunicado){
             //dd($comunicado);
             $fieldTitle = $comunicado->find('div[class=views-field views-field-title]',0);
             $titulo = $fieldTitle->children[0]->children[0]->innertext;
+            $titulo = str_replace('&quot;', '"', $titulo);
             $url = $urlBase . $fieldTitle->children[0]->children[0]->href;
 
             $fieldData = $comunicado->find('div[class=views-field views-field-created]',0);
@@ -147,10 +185,11 @@ class ClippingController extends Controller
             
             if($data >= $dataInicio && $data <= $dataFinal){
                 array_push($comunicadosArray, [$titulo, $url]);
+                $count++;
             }           
             
         }
-
+        array_push($comunicadosArray, $count);
         return $comunicadosArray;
     }
 
@@ -161,46 +200,70 @@ class ClippingController extends Controller
         $urlBase = "http://ufape.edu.br";
         $urlAgenda = 'http://ufape.edu.br/br/eventos';
 
-        $html = file_get_html($urlAgenda);
+        //$html = file_get_html($urlAgenda);
+        
+        $html = curl_init($urlAgenda);
+        curl_setopt($html, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($html, CURLOPT_BINARYTRANSFER, true);
+        $conteudo = curl_exec($html);
+        curl_close($html);
+
+        $html =  str_get_html($conteudo);
         
         //encontra div com conjunto de notícias
         $content = $html->find('div[class=item-list]',0);
         $lista = $content->children[0];
         
         $agendaArray = [];
+        $count = 0;
         foreach($lista->children as $evento){
             //dd($evento);
             $dataField = $evento->find('div[class=views-field views-field-field-data]', 0);
             $dataEvento = $dataField->children[0]->children[0]->innertext;
 
             $fieldTitle = $evento->find('div[class=views-field views-field-title]',0);
-            $titulo = $dataEvento . " às " . $fieldTitle->children[0]->children[0]->innertext;
+            $titulo = $dataEvento . " - " . $fieldTitle->children[0]->children[0]->innertext;
+            $titulo = str_replace('&quot;', '"', $titulo);
             $url = $urlBase . $fieldTitle->children[0]->children[0]->href;
 
-            $htmlEvento = file_get_html($url);
+            //$htmlEvento = file_get_html($url);
+            $htmlEvento = curl_init($url);
+            curl_setopt($htmlEvento, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($htmlEvento, CURLOPT_BINARYTRANSFER, true);
+            $conteudo = curl_exec($htmlEvento);
+            curl_close($htmlEvento);
+    
+            $htmlEvento =  str_get_html($conteudo);
+
             //encontra div com conjunto de notícias
             $contentEvento = $htmlEvento->find('div[class=field field-name-post-date field-type-ds field-label-hidden]',0);
-            $data = $contentEvento->children[0]->children[0];
+            if(isset($contentEvento->children[0]->children[0])){
+                $data = $contentEvento->children[0]->children[0];
 
-            $data = explode(", ", $data->innertext);
-            list($dia, $mesString) = explode(" ", $data[1]);
-            $ano = substr($data[2], 0, 4);
+                $data = explode(", ", $data->innertext);
+                list($dia, $mesString) = explode(" ", $data[1]);
+                $ano = substr($data[2], 0, 4);
 
-            //dd($dia, $mes, $ano);
+                //dd($dia, $mes, $ano);
 
-            $meses = array("Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro");
-            $mes = array_search($mesString, $meses)+1;
-            
-            $dataString = $dia . '/' . $mes . '/' . $ano;
+                $meses = array("Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro");
+                $mes = array_search($mesString, $meses)+1;
+                
+                $dataString = $dia . '/' . $mes . '/' . $ano;
+            }
+            // else{
+            //     $dataString = '14/08/2020';
+            // }
             $data = date_create_from_format('j/m/Y', $dataString); 
             //dd($data);
             
             if($data >= $dataInicio && $data <= $dataFinal){
                 array_push($agendaArray, [$titulo, $url]);
+                $count++;
             }           
             
         }
-
+        array_push($agendaArray, $count);
         return $agendaArray;
     }
 
@@ -211,16 +274,26 @@ class ClippingController extends Controller
         $urlBase = "http://ufape.edu.br";
         $urlComunicados = 'http://ufape.edu.br/br/editais-e-selecoes';
 
-        $html = file_get_html($urlComunicados);
+        //$html = file_get_html($urlComunicados);
+
+        $html = curl_init($urlComunicados);
+        curl_setopt($html, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($html, CURLOPT_BINARYTRANSFER, true);
+        $conteudo = curl_exec($html);
+        curl_close($html);
+
+        $html =  str_get_html($conteudo);
         
         //encontra div com conjunto de notícias
         $content = $html->find('div[class=view-content]',0);
         
         $comunicadosArray = [];
+        $count = 0;
         foreach($content->children as $comunicado){
             //dd($comunicado);
             $fieldTitle = $comunicado->find('div[class=views-field views-field-title]',0);
             $titulo = $fieldTitle->children[0]->children[0]->innertext;
+            $titulo = str_replace('&quot;', '"', $titulo);
             $url = $urlBase . $fieldTitle->children[0]->children[0]->href;
 
             $fieldData = $comunicado->find('div[class=views-field views-field-created]',0);
@@ -230,10 +303,12 @@ class ClippingController extends Controller
             
             if($data >= $dataInicio && $data <= $dataFinal){
                 array_push($comunicadosArray, [$titulo, $url]);
+                $count++;
             }           
             
         }
 
+        array_push($comunicadosArray, $count);
         return $comunicadosArray;
     }
 
