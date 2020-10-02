@@ -105,13 +105,28 @@
                 <div>
                     @php $resultado = ""; @endphp 
                     
-                    @foreach($textoArray as $categoria)
-                        <font face="arial, sans-serif" style="box-sizing:border-box" size="4">
-                          <h4 class="titulo" style="box-sizing:border-box">
-                            <b>{{ $categoria[1] }}</b>
-                          </h4>
-                        </font> 
-                        
+                    <p>
+                    Saudações, <br><br>
+
+                    Segue o nosso <i>clipping</i> semanal das publicações realizadas no portal da UFAPE:<br><br>
+                    </p>
+                    @foreach($textoArray as $categoria)  
+                        @php $existe = false; @endphp                    
+                        @if(count($categoria[0]) > 0)                          
+                          @foreach($categoria[0] as $publicacao)
+                            @if(isset($publicacao[0]) && isset($publicacao[1]))
+                              @php $existe = true; @endphp
+                            @endif
+                          @endforeach
+                        @endif
+                        @if($existe)
+                          <font face="arial, sans-serif" style="box-sizing:border-box" size="4">
+                            <h4 class="titulo" style="box-sizing:border-box">
+                              <b>{{ $categoria[1] }}</b>
+                            </h4>
+                          </font> 
+                        @endif
+
                         @foreach($categoria[0] as $publicacao)
                           @if(isset($publicacao[0]) && isset($publicacao[1]))
                             <b>{{ $publicacao[0] }}</b> - 
