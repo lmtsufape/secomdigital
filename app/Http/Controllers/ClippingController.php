@@ -39,13 +39,8 @@ class ClippingController extends Controller
 
         // $textoArray = [[$editais, "Editais e Seleções"]];
 
-        if(count($novas) > 0){
-            $textoArray = [[$noticias,"Notícias"], [$comunicados, "Comunicados"], [$agenda, "Agenda"],
+        $textoArray = [[$noticias,"Notícias"], [$comunicados, "Comunicados"], [$agenda, "Agenda"],
                          [$editais, "Editais e Seleções"], [$novas, "Páginas novas, atualizadas ou destaques"]];
-        }else{
-            $textoArray = [[$noticias,"Notícias"], [$comunicados, "Comunicados"], [$agenda, "Agenda"],
-                         [$editais, "Editais e Seleções"]];
-        }
         
         return view('clipping.show', ['textoArray'  => $textoArray, 
                                        'dataInicio' => $request->dataInicio,
@@ -88,28 +83,35 @@ class ClippingController extends Controller
 
             $fieldUrl = $noticia->find('div[class=field-content]',0);
             $urlNoticia = $urlBase . $fieldUrl->children[0]->href;
-
-            //$htmlNoticia = file_get_html($urlNoticia);
-           
-            $htmlNoticia = curl_init($urlNoticia);
-            curl_setopt($htmlNoticia, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($htmlNoticia, CURLOPT_BINARYTRANSFER, true);
-            $conteudo = curl_exec($htmlNoticia);
-            curl_close($htmlNoticia);
-
-            $htmlNoticia =  str_get_html($conteudo);
-
-            $content = $htmlNoticia->find('span[class=submitted]',0);
-            $dataPostagem = $content->innertext;
-            $pos = strpos($dataPostagem, '/');
-            $dataString = substr($dataPostagem, $pos-2, 10);
-            $data = date_create_from_format('j/m/Y H:i:s', $dataString . "00:00:00");  
+            //dd($urlNoticia);
             
-            if($data >= $dataInicio && $data <= $dataFinal){
-                array_push($noticiasArray, [$titulo, $urlNoticia]);
-                $count++;
-            }    
-                     
+            if(explode("/", $urlNoticia)[4] == "noticia"){
+                //dd($urlNoticia);
+                //$htmlNoticia = file_get_html($urlNoticia);
+            
+                $htmlNoticia = curl_init($urlNoticia);
+                curl_setopt($htmlNoticia, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($htmlNoticia, CURLOPT_BINARYTRANSFER, true);
+                $conteudo = curl_exec($htmlNoticia);
+                curl_close($htmlNoticia);
+
+                // dd($conteudo);
+                $htmlNoticia =  str_get_html($conteudo);
+                // dd($htmlNoticia);
+                $contentClass = $htmlNoticia->find('span[class=submitted]',0);
+                if($contentClass != null){
+                    $innerText = $contentClass->find('text',0);
+                    $dataPostagem = $innerText->innertext;
+                }
+                $pos = strpos($dataPostagem, '/');
+                $dataString = substr($dataPostagem, $pos-2, 10);
+                $data = date_create_from_format('j/m/Y H:i:s', $dataString . "00:00:00");  
+                
+                if($data >= $dataInicio && $data <= $dataFinal){
+                    array_push($noticiasArray, [$titulo, $urlNoticia]);
+                    $count++;
+                }    
+            }
         }
 
         $urlNoticias = 'http://ufape.edu.br/br/noticias';
