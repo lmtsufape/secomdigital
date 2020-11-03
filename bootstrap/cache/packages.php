@@ -63,4 +63,15 @@
       0 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
     ),
   ),
+  'weidner/goutte' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Weidner\\Goutte\\GoutteServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Goutte' => 'Weidner\\Goutte\\GoutteFacade',
+    ),
+  ),
 );
