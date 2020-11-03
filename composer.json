@@ -9,11 +9,13 @@
     "license": "MIT",
     "require": {
         "php": "^7.2.5",
+        "fabpot/goutte": "^4.0",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
-        "guzzlehttp/guzzle": "^6.3",
+        "guzzlehttp/guzzle": "^7.2",
         "intervention/image": "^2.5",
-        "laravel/framework": "^7.0",
+        "laravel/framework": "^8.0",
+        "weidner/goutte": "^2",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0"
     },
