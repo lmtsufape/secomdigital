@@ -36,7 +36,7 @@ class ImageController extends Controller
     public function uploadFile($request){
 
     	if($request->hasFile('filename')){
-    		$image 				= $request->file('filename');
+    		$image 			= $request->file('filename');
     		$filename 		= $image->getClientOriginalName();
     		$destination 	= storage_path('app/public');
 
