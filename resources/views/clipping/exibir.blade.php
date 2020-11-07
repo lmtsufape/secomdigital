@@ -8,47 +8,70 @@
 <div class="container">
         <div class="row">
           <div class="col-sm-12">
+              <p>
+              Saudações, <br><br>
+
+              Segue o nosso <i>clipping</i> semanal das publicações realizadas no portal da UFAPE:<br><br>
+              </p>
             
-              <h2>Notícias</h2><br>
+              <font face="sans-serif" style="box-sizing:border-box" size="4">
+                <h4 class="titulo" style="box-sizing:border-box">
+                  <b>Notícias</b>
+                </h4>                  
+              </font>
+
               @if(!in_array("erro", $noticias)  )
-                @forelse ($noticias as $value)
-                    <h5> <strong> {{ $value[0]  }} </strong>  - <a href="{{ 'http://ufape.edu.br'.$value[1] }}" target="_blank">{{ 'http://ufape.edu.br'.$value[1] }}</a>
-                    </h5> <br>
+                @forelse ($noticias as $value)                
+                <b>{{ $value[0]  }}</b> - 
+                <a class="link" href="{{ 'http://ufape.edu.br'.$value[1] }}" target="_blank"> {{ 'http://ufape.edu.br'.$value[1] }}</a><br><br>                     
                 @empty
                     <p>Sem Notícias</p>
                 @endforelse
               @else
                 <h5 class="text-danger">Erro, recarregue a página</h5>
               @endif
-
-              <h2>Comunicados</h2><br>
+              
+              <font face="sans-serif" style="box-sizing:border-box" size="4">
+                <h4 class="titulo" style="box-sizing:border-box">
+                  <b>Comunicados</b>
+                </h4>                  
+              </font>
               @if(!in_array("erro", $comunicados)  )
                 @forelse ($comunicados as $value)
-                    <h5> <strong>{{  $value[0]  }} </strong> - <a href="{{ 'http://ufape.edu.br'.$value[1] }}" target="_blank">{{ 'http://ufape.edu.br'.$value[1] }}</a></h5><br>
+                  <b>{{ $value[0]  }}</b> - 
+                  <a class="link" href="{{ 'http://ufape.edu.br'.$value[1] }}" target="_blank"> {{ 'http://ufape.edu.br'.$value[1] }}</a><br><br>
                 @empty
                     <p>Sem Comunicados</p>
                 @endforelse
               @else
                 <h5 class="text-danger">Erro, recarregue a página</h5>
               @endif
-
-              <h2>Agenda</h2><br>
+              
+              <font face="sans-serif" style="box-sizing:border-box" size="4">
+                <h4 class="titulo" style="box-sizing:border-box">
+                  <b>Agenda</b>
+                </h4>                  
+              </font>
               @if(!in_array("erro", $agenda)   )             
                 @forelse ($agenda as $value) 
-                      <h5> <strong>{{ $value[0]  }}  {{ $value[1] }} </strong> -  <a href="{{ 'http://ufape.edu.br'.$value[2] }}" target="_blank">{{ 'http://ufape.edu.br'.$value[2] }}</a></h5><br>
+                    <b>{{ $value[0]  }} {{ $value[1] }}</b> - 
+                    <a class="link" href="{{ 'http://ufape.edu.br'.$value[2] }}" target="_blank"> {{ 'http://ufape.edu.br'.$value[2] }}</a><br><br>                      
                 @empty
                     <p>Sem Agenda</p>
                 @endforelse
               @else
                 <h5 class="text-danger">Erro, recarregue a página</h5>
-              @endif                          
-
-              <h2>Editais e Seleções</h2><br>
+              @endif       
+              
+              <font face="sans-serif" style="box-sizing:border-box" size="4">
+                <h4 class="titulo" style="box-sizing:border-box">
+                  <b>Editais e Seleções</b>
+                </h4>                  
+              </font>
               @if(!in_array("erro", $editais) )
-                @forelse ($editais as $edital)
-                    <h5> <strong> {{ $edital[0]  }}  </strong> - 
-                      <a href="{{ 'http://ufape.edu.br'.$edital[1] }}" target="_blank">{{ 'http://ufape.edu.br'.$edital[1] }}</a>
-                    </h5><br>                                
+                @forelse ($editais as $value)
+                    <b>{{ $value[0]  }}</b> - 
+                    <a class="link" href="{{ 'http://ufape.edu.br'.$value[1] }}"  target="_blank"> {{ 'http://ufape.edu.br'.$value[1] }}</a><br><br>                                                   
                 @empty
                     <p>Sem Editais</p>
                 @endforelse
