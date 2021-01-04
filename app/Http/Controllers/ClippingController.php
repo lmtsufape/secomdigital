@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 // use App\Http\Controllers\Goutte;
 use Goutte\Client;
@@ -83,8 +82,20 @@ class ClippingController extends Controller
             foreach ($noticiasData as $key => $value) {
                 $data = new DateTime(str_replace ('/', '-',  explode(" - ", $noticiasData[$key])[0]));
                  // dd($dataInicio);
+
+                try {
+                    $crawler1 = $client->request('GET', 'http://ufape.edu.br'.$noticiasLink[$key]);
+                } catch (\Throwable $e) {
+
+                    return $noticias[0] = ["erro"];
+                }
+
+                $noticia = $crawler1->filter('div.field-item')->each(function ($node) {
+                    return $node->text();
+                });
+                $noticiaTexto = substr(reset($noticia), 0 , 250).'...';
                 if($dataInicio <= $data && $dataFinal >= $data ){
-                    array_push($noticias, [ $noticiasTexto[$key], $noticiasLink[$key] ]);                  
+                    array_push($noticias, [ $noticiasTexto[$key], $noticiasLink[$key], $noticiaTexto]);
                 }                  
             }
             
@@ -135,8 +146,20 @@ class ClippingController extends Controller
             foreach ($comunicadosTexto as $key => $value) {
                 $data = new DateTime(str_replace ('/', '-',  explode(" - ", $comunicadosData[$key])[0]));
                 // dd($data);
+                try {
+                    $crawler1 = $client->request('GET', 'http://ufape.edu.br'.$comunicadosLink[$key]);
+                } catch (\Throwable $e) {
+
+                    return $comunicados[0] = ["erro"];
+                }
+
+                $comunicado = $crawler1->filter('div.field-item')->each(function ($node) {
+                    return $node->text();
+                });
+                $comunicadoTexto = substr(reset($comunicado), 0 , 250).'...';
+
                 if($dataInicio <= $data && $dataFinal >= $data ){
-                    array_push($comunicados, [ $comunicadosTexto[$key], $comunicadosLink[$key] ]);                  
+                    array_push($comunicados, [ $comunicadosTexto[$key], $comunicadosLink[$key], $comunicadoTexto ]);
                 }                  
             }
             
@@ -181,8 +204,21 @@ class ClippingController extends Controller
             });      
             foreach ($agendaTexto as $key => $value) {
                 $data = new DateTime(str_replace ('/', '-', $agendaData[$key]));
+
+                try {
+                    $crawler1 = $client->request('GET', 'http://ufape.edu.br'.$agendaLink[$key]);
+                } catch (\Throwable $e) {
+
+                    return $agenda[0] = ["erro"];
+                }
+
+                $agend = $crawler1->filter('div.field-item')->each(function ($node) {
+                    return $node->text();
+                });
+                $agendaTexto = substr(reset($agend), 0 , 250).'...';
+
                 if($dataInicio <= $data && $dataFinal >= $data ){
-                    array_push($agenda, [ $agendaData[$key], $value, $agendaLink[$key]]);                  
+                    array_push($agenda, [ $agendaData[$key], $value, $agendaLink[$key], $agendaTexto]);
                 }                  
             }
             
