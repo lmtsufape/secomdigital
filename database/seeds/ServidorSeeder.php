@@ -11,6 +11,20 @@ class ServidorSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('servidors')->insert([
+            'siape' => '1552606',
+            'nome' => 'Edgar Vinicius',
+            'email' => 'adgar.carvalho@hotmail.com',
+            'data_nascimento' => '1973/05/13',
+        ]);
+        DB::table('servidors')->insert([
+            'siape' => '2101840',
+            'nome' => 'Edgar',
+            'email' => 'edgar.tecnico@hotmail.com',
+            'data_nascimento' => '1969/09/20',
+        ]);
+
+        /**
       DB::table('servidors')->insert([
           'siape' => '1552606',
           'nome' => 'ADILMA LOPES BRANDÃO',
@@ -545,6 +559,6 @@ class ServidorSeeder extends Seeder
       //     'email' => '',
       //     'data_nascimento' => '',
       // ]);
-
+    */
     }
 }

@@ -24,13 +24,13 @@
                       <div class="row d-flex">
                         <div class="col-sm-5">
                           <label>Data Inicial</label>
-                          <input name="dataInicio" placeholder="dd/mm/aaaa" required class="form-control @error('dataInicio') is-invalid @enderror" value="{{old('dataInicio')}}">
+                          <input name="dataInicio" placeholder="dd/mm/aaaa" required class="form-control @error('dataInicio') is-invalid @enderror" value="{{date("d/m/Y", strtotime("-1 week"))}}">
                         </div>
                         <div class="col-sm-6" id="dataFinal">
                           <div class="row">
                             <div class="col-sm-10">
                               <label>Data Final</label>
-                              <input name="dataFinal" placeholder="dd/mm/aaaa" required class="form-control @error('dataFinal') is-invalid @enderror" value="{{old('dataFinal')}}">
+                              <input name="dataFinal" placeholder="dd/mm/aaaa" required class="form-control @error('dataFinal') is-invalid @enderror" value="{{date("d/m/Y")}}">
                             </div>
                             
                             @if(!$errors->has('dataFinal') && $errors->has('dataInicio'))
