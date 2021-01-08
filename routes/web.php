@@ -40,3 +40,4 @@ Route::post('servidor/enviarCartao','ServidorController@enviarEmail' )->name('se
 //Clipping
 Route::get('clipping/create', 'ClippingController@create'   )->name('clipping.create');
 Route::post('clipping/gerar', 'ClippingController@gerar'    )->name('clipping.gerar');
+Route::post('clipping/enviarEmail', 'ClippingController@gerarEmail' )->name('clipping.enviarEmail');

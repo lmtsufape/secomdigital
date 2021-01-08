@@ -102,7 +102,13 @@
                     <h5 class="text-danger">Erro, recarregue a página</h5>
                 @endif
 
+
             </div>
+            <form method="post" id="formGerar" action="{{ route('clipping.enviarEmail') }}">
+                @csrf
+                <br>
+                <button type="submit" class="btn btn-primary" id="gerar">Enviar Clipping</button>
+            </form>
         </div>
     </div>
 @endsection

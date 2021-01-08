@@ -17,6 +17,14 @@ class ServidorSeeder extends Seeder
             'email' => 'adgar.carvalho@hotmail.com',
             'data_nascimento' => '1973/05/13',
         ]);
+
+        DB::table('servidors')->insert([
+            'siape' => '1552606',
+            'nome' => 'Edgar Vinicius',
+            'email' => 'edgarvini2009@gmail.com',
+            'data_nascimento' => '1973/05/13',
+        ]);
+
         DB::table('servidors')->insert([
             'siape' => '2101840',
             'nome' => 'Edgar',

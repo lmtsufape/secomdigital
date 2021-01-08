@@ -21,17 +21,9 @@ class ClippingController extends Controller
     	return view('clipping.create');
     }
 
-    public function gerar(Request $request){
-        //dd($request);
-        $request->validate([
-            'dataInicio'       => ['required', 'date_format:d/m/Y'],
-            'dataFinal'        => ['required', 'date_format:d/m/Y'],
-            'titulo.*'         => ['required_with:link.*'],
-            'link.*'           => ['required_with:titulo.*'],
-        ]);
-  
-        $dataInicio = $request->dataInicio . " 00:00:00"; 
-        $dataFinal = $request->dataFinal . " 23:59:59";
+    public function gerar(){
+        $dataFinal = date("d-m-Y") . " 00:00:00";
+        $dataInicio = date("d-m-Y", strtotime("-1 week")) . " 23:59:59";
 
 
         $noticias = $this->gerarNoticias($dataInicio, $dataFinal);
@@ -43,10 +35,21 @@ class ClippingController extends Controller
         
         return view('clipping.exibir', compact('noticias', 'comunicados', 'agenda', 'editais'));
     }
+
+    public function gerarEmail(){
+        $dataFinal = date("d-m-Y") . " 00:00:00";
+        $dataInicio = date("d-m-Y", strtotime("-1 week")) . " 23:59:59";
+
+
+        $noticias = $this->gerarNoticias($dataInicio, $dataFinal);
+        $comunicados = $this->gerarComunicados($dataInicio, $dataFinal);
+        $agenda = $this->gerarAgenda($dataInicio, $dataFinal);
+        $editais = $this->gerarEditais($dataInicio, $dataFinal);
+
+        \Illuminate\Support\Facades\Mail::send(new \App\Mail\ClippingMail($noticias, $comunicados, $agenda, $editais));
+    }
     
     public function gerarNoticias($dataInicio, $dataFinal){
-        $dataInicio = str_replace ('/', '-', explode(" ",  $dataInicio)[0]);
-        $dataFinal = str_replace ('/', '-', explode(" ",  $dataFinal)[0]); 
         $dataInicio = new DateTime($dataInicio);
         $dataFinal = new DateTime($dataFinal);
 
