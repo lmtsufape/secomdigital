@@ -21,9 +21,17 @@ class ClippingController extends Controller
     	return view('clipping.create');
     }
 
-    public function gerar(){
-        $dataFinal = date("d-m-Y") . " 00:00:00";
-        $dataInicio = date("d-m-Y", strtotime("-1 week")) . " 23:59:59";
+    public function gerar(Request $request){
+        //dd($request);
+        $request->validate([
+            'dataInicio'       => ['required', 'date_format:d/m/Y'],
+            'dataFinal'        => ['required', 'date_format:d/m/Y'],
+            'titulo.*'         => ['required_with:link.*'],
+            'link.*'           => ['required_with:titulo.*'],
+        ]);
+
+        $dataInicio = $request->dataInicio . " 00:00:00";
+        $dataFinal = $request->dataFinal . " 23:59:59";
 
 
         $noticias = $this->gerarNoticias($dataInicio, $dataFinal);
@@ -32,7 +40,7 @@ class ClippingController extends Controller
         $editais = $this->gerarEditais($dataInicio, $dataFinal);
 
         // dd($noticias, $comunicados, $agenda, $editais);
-        
+
         return view('clipping.exibir', compact('noticias', 'comunicados', 'agenda', 'editais'));
     }
 

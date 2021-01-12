@@ -8,9 +8,11 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                Saudações, <br><br>
-                Segue o nosso <i>clipping</i> semanal das publicações realizadas no portal da UFAPE:<br><br>
-
+                <p>
+                    Saudações, </p>
+                <p>
+                    Segue o nosso <i>clipping</i> semanal das publicações realizadas no portal da UFAPE:
+                </p><br>
 
                 <font face="sans-serif" style="box-sizing:border-box" size="4">
                     <h4 class="titulo" style="box-sizing:border-box">
@@ -93,7 +95,7 @@
                     @forelse ($editais as $value)
                         <p>
                             <a class="link" href="{{ 'http://ufape.edu.br'.$value[1] }}"
-                           target="_blank"> <b>{{ $value[0]  }}</b> </a>
+                               target="_blank"> <b>{{ $value[0]  }}</b> </a>
                         </p>
                     @empty
                         <p>Sem Editais</p>

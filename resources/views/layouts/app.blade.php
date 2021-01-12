@@ -36,9 +36,8 @@
         <main class="py-4">
             @yield('content')
         </main>
-        <br>
-        <div id="footer-brasil"></div>
     </div>
 </div>
+@include('layouts.footer')
 </body>
 </html>
