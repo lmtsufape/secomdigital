@@ -1,0 +1,638 @@
+/* CONFIG */
+
+span.p-zero > p {
+    margin-bottom: 0px;
+}
+
+:root{
+    --textcolor: #373737;
+    --textcolor2: #6C6C6C;
+    --bgcolor: #f5f5f5;
+    --primaria: #1CE8B1;
+    --secundaria: #1492E6;
+    --terciaria: #24CEE8;
+    --textorodape: #707070;
+    --veterinaria: #F97171;
+    --bcc: #9BE2FC;
+    --engalimentos: #FFCA61;
+    --pedagogia: #FFDC2A;
+    --zootec: #D693F2;
+    --letras: #FF8FC0;;
+    --agronomia: #7CEF90;
+    --botao: #53BCF2;
+    --atencao: #FF5E5E;
+}
+
+/* X CONFIG X */
+
+/* CUSTOM */
+body, html{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#header{
+    width: 100%;
+    background-color: transparent;
+    transition: background ease-out 0.2s;
+}
+
+#header .navbar-collapse{
+    width: auto;
+}
+
+#header .nav-link{
+    font-size: 13px;
+    font-weight: bolder;
+    padding-left: 0;
+    padding-right: 0;
+    color: var(--textcolor2);
+    border-bottom: solid 3px transparent;
+
+}
+
+#header .nav-link:hover{
+    border-bottom: solid 3px #a5a5a5;
+}
+
+#header .active{
+    border-bottom: solid 3px var(--textcolor);
+
+}
+
+.fundo{
+    background-color: var(--bgcolor);
+}
+
+.data{
+    color: var(--secundaria);
+    font-size: 25px;
+    font-weight: bolder;
+    border-bottom: solid 2px #f5f5f5;
+    padding-bottom: 7px;
+}
+
+.redirecionamento{
+    color: var(--secundaria);
+    font-weight: bolder;
+}
+
+.legenda{
+    color: black;
+    font-weight: bolder;
+}
+
+.titulo{
+    color: var(--textcolor);
+    font-size: 37px;
+    font-weight: bolder;
+}
+
+.tituloBorda{
+    border-bottom: solid 3px var(--textcolor);
+    padding-bottom: 6px;
+}
+
+.caixa{
+    border-radius: 0.5rem;
+    background-color: white;
+}
+
+.textoRodape{
+    color: var(--textorodape);
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.textoagronomia{
+    color: var(--agronomia);
+    font-size: 20px;
+    font-weight: bolder;
+    margin-top: 30px;
+}
+
+.textobcc{
+    color: var(--bcc);
+    font-size: 20px;
+    font-weight: bolder;
+    margin-top: 15px;
+}
+
+.textoeng{
+    color: var(--engalimentos);
+    font-size: 20px;
+    font-weight: bolder;
+    margin-top: 15px;
+}
+
+.textovet{
+    color: var(--veterinaria);
+    font-size: 20px;
+    font-weight: bolder;
+    margin-top: 15px;
+}
+
+.textozoo{
+    color: var(--zootec);
+    font-size: 20px;
+    font-weight: bolder;
+    margin-top: 30px;
+}
+
+.textopedagogia{
+    color: var(--pedagogia);
+    font-size: 20px;
+    font-weight: bolder;
+    margin-top: 30px;
+}
+
+.textoletras{
+    color: var(--letras);
+    font-size: 20px;
+    font-weight: bolder;
+    margin-top: 15px;
+}
+
+.subtitulo{
+    color: var(--textcolor2);
+    font-size: 13px;
+    margin-top: 30px;
+}
+
+.subtitulo2{
+    color: var(--textcolor2);
+    font-size: 13px;
+}
+
+.cabecalho{
+    background-color: var(--primaria);
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+}
+
+.corpo{
+    background-color: white;
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+}
+
+.tituloTabelas{
+    font-weight: bolder;
+    font-size: 20px;
+    color: white;
+}
+
+.img-card-data {
+    display: inline-block;
+}
+
+/* X CUSTOM X */
+
+/* CUSTOM 2 */
+
+body, html{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#header{
+    width: 100%;
+    background-color: transparent;
+    transition: background ease-out 0.2s;
+}
+
+#header .navbar-collapse{
+    width: auto;
+}
+
+#header .nav-link{
+    font-size: 13px;
+    font-weight: bolder;
+    padding-left: 0;
+    padding-right: 0;
+    color: var(--textcolor2);
+    border-bottom: solid 3px transparent;
+
+}
+
+#header .nav-link:hover{
+    border-bottom: solid 3px var(--textcolor);
+
+}
+
+.fundo{
+    background-color: var(--bgcolor);
+}
+
+.data{
+    color: var(--secundaria);
+    font-size: 23px;
+    font-weight: bolder;
+    border-bottom: solid 2px #f5f5f5;
+    padding-bottom: 7px;
+}
+
+.redirecionamento{
+    color: var(--secundaria);
+    font-weight: bolder;
+
+}
+
+.legenda{
+    color: black;
+    font-weight: bolder;
+}
+
+.titulo{
+    color: var(--textcolor);
+    font-size: 37px;
+    font-weight: bolder;
+}
+
+.tituloBorda{
+    border-bottom: solid 3px var(--textcolor);
+    padding-bottom: 6px;
+}
+
+.caixa{
+    border-radius: 0.5rem;
+    background-color: white;
+}
+
+.textoRodape{
+    color: var(--textorodape);
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.textoagronomia{
+    color: var(--agronomia);
+    font-size: 20px;
+    font-weight: bolder;
+    margin-top: 30px;
+}
+
+.textobcc{
+    color: var(--bcc);
+    font-size: 20px;
+    font-weight: bolder;
+    margin-top: 15px;
+}
+
+.textoeng{
+    color: var(--engalimentos);
+    font-size: 20px;
+    font-weight: bolder;
+    margin-top: 15px;
+}
+
+.textovet{
+    color: var(--veterinaria);
+    font-size: 20px;
+    font-weight: bolder;
+    margin-top: 15px;
+}
+
+.textozoo{
+    color: var(--zootec);
+    font-size: 20px;
+    font-weight: bolder;
+    margin-top: 30px;
+}
+
+.textopedagogia{
+    color: var(--pedagogia);
+    font-size: 20px;
+    font-weight: bolder;
+    margin-top: 30px;
+}
+
+.textoletras{
+    color: var(--letras);
+    font-size: 20px;
+    font-weight: bolder;
+    margin-top: 15px;
+}
+
+.subtitulo{
+    color: var(--textcolor2);
+    font-size: 15px;
+    margin-top: 30px;
+}
+
+.subtitulo2{
+    color: var(--textcolor2);
+    font-size: 13px;
+}
+
+.cabecalho{
+    background-color: var(--primaria);
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+}
+
+.corpo{
+    background-color: white;
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+}
+
+.tituloTabelas{
+    font-weight: bolder;
+    font-size: 20px;
+    color: white;
+}
+
+.botao{
+    background-color: var(--botao);
+    border-radius: 00.5rem;
+    color: white;
+    font-weight: bolder;
+}
+
+.fundo2{
+    background-color: var(--bgcolor);
+    padding-top: 90px;
+    padding-bottom: 90px;
+}
+
+.tituloLista{
+    color: black;
+    font-weight: bolder;
+    font-size: 16px;
+}
+
+.destaqueLista{
+    color: black;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.link{
+    color: var(--secundaria);
+    font-size: 13px;
+}
+
+.listagemLista{
+    border-bottom:solid 2px #f5f5f5;
+}
+
+.datinha{
+    color: var(--textorodape);
+    font-size: 13px;
+    font-weight: bolder;
+}
+
+.subtexto{
+    color: var(--textorodape);
+    font-size: 13px;
+}
+
+.textoInput{
+    color: black;
+    font-size: 14px;
+}
+
+.checkbox{
+    color: var(--textorodape);
+    font-size: 13px;
+}
+
+.caixaDeTexto{
+    background-color: #f5f5f5;
+    border-radius: 0.5rem;
+    border: 1px solid transparent;
+}
+
+.botaoEntrar{
+    background-color: var(--secundaria);
+    size: 100%;
+    color: white;
+    font-weight: bolder;
+    font-size: 17px;
+    border-radius: 0.5rem;
+}
+
+.tituloEntrada{
+    font-size: 30px;
+    color: var(--primaria);
+    font-weight: 700;
+}
+
+.textoEntrada{
+    font-size: 18px;
+    color: var(--textcolor);
+    font-weight: bolder;
+}
+
+.modalFundo{
+    background-color: white;
+    border-radius: 0.5rem;
+    border: solid 1px transparent;
+}
+
+.tituloModal{
+    color: var(--secundaria);
+    font-weight: bolder;
+    font-size: 23px;
+    border-bottom: solid 2px var(--secundaria);
+}
+
+.campoDeTexto{
+    background-color: #f5f5f5;
+    border-radius: 00.5rem;
+    border: 0px;
+}
+
+.textoModal{
+    color: var(--textcolor);
+    font-weight: bolder;
+    font-size: 15px;
+}
+
+.botaoVerde{
+    background-color: var(--primaria);
+    border-radius: 00.5rem;
+    color: white;
+    font-weight: bolder
+}
+
+.form-label {
+    font-weight: bolder;
+}
+/* X CUSTOM 2 X */
+
+/*TELA DE VIZUALIZAR DOCUMENTOS*/
+
+.cabecalhoAzul{
+    background-color: var(--terciaria);
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+}
+
+.tituloDocumento{
+    color: black;
+    font-weight: 700;
+    font-size: 15px;
+}
+
+.textoDocumento{
+    color: var(--textcolor);
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.tituloTipoDoc{
+    color: var(--terciaria);
+    font-weight: 600;
+    font-size: 24px;
+}
+
+.nomeDocumento{
+    color: var(--textcolor);
+    font-weight: 600;
+    font-size: 15px;
+}
+
+/**/
+
+.icon_order_table {
+    padding: 3px;
+    width: 25px;
+    border-radius: 50px;
+    transform: rotate(90deg);
+}
+
+.icon-email-candidato {
+    background-color: var(--terciaria);
+    padding-right: 10px;
+    padding-left: 10px;
+    border-radius: 00.5rem;
+    height: 35px;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: 0.3s;
+}
+
+.icon-email-candidato:hover {
+    transition: 0.3s;
+    background-color: var(--secundaria);
+}
+
+.cabecalhoCurso{
+    background-color: var(--veterinaria);
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+}
+
+/*TELA DE ENVIO DE DOCUMENTOS*/
+
+.cabecalhoCurso{
+    background-color: var(--veterinaria); /*COR DO CURSO*/
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+}
+
+.tituloEnvio{
+    color: black;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.subtexto{
+    color: var(--textcolor);
+    font-size: 14px;
+    text-align: justify;
+}
+
+ul.timeline{
+    list-style-type: none;
+    position: relative;
+}
+
+ul.timeline:before{
+    content: ' ';
+    background: #d4d9df;
+    display: inline-block;
+    position: absolute;
+    left: 12px;
+    width: 2px;
+    height: 100%;
+    z-index: 400;
+}
+
+ul.timeline > li:before{
+    content: ' ';
+    background: white;
+    display: inline-block;
+    position: absolute;
+    border-radius: 50%;
+    border: 3px solid var(--secundaria);
+    left: 0px;
+    width: 25px;
+    height: 25px;
+    z-index: 400;
+}
+
+.subtexto2{
+    color: var(--textcolor2);
+    font-size: 13px;
+    text-align: justify;
+}
+
+.subtexto3{
+    color: var(--textcolor);
+    font-size: 15px;
+    text-align: justify;
+}
+
+/*TELA DE VIZUALIZAR DOCUMENTOS*/
+
+.cabecalhoAzul{
+    background-color: var(--terciaria);
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+}
+
+.tituloDocumento{
+    color: black;
+    font-weight: 700;
+    font-size: 15px;
+}
+
+.textoDocumento{
+    color: var(--textcolor);
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.tituloTipoDoc{
+    color: var(--terciaria);
+    font-weight: 600;
+    font-size: 24px;
+}
+
+.nomeDocumento{
+    color: var(--textcolor);
+    font-weight: 600;
+    font-size: 15px;
+}
+
+/**/
+
+.caixaCurso{
+    border-radius: 0.5rem;
+    background-color: var(--veterinaria); /*COR DO CURSO*/
+}
+
+.textoChamada{
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.check-mark::after{
+    border-color: black;
+}
+
+label {
+    font-weight: bolder;
+}
