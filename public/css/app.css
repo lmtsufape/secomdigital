@@ -1207,7 +1207,7 @@ select {
 	height: 5rem;
 }
 .min-h-screen {
-	min-height: 100vh;
+	min-height: 70vh;
 }
 .w-5 {
 	width: 1.25rem;

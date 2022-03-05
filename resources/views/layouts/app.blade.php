@@ -58,12 +58,10 @@
 @endif
 
 <!-- Page Content -->
-    <main>
+    <div>
         @yield('content')
-    </main>
+    </div>
 </div>
-
-@stack('modals')
 
 @component('layouts.footer')
 @endcomponent
