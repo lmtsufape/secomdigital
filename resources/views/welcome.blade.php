@@ -8,13 +8,10 @@
             </div>
             <div class="col-sm" align="justify">
                 <h2 class="titulo">Bem Vindo!</h2>
-                <p class="paragrafo">A <b class="secom">secom digital</b> é um sistema
-                    lorem Ipsum é simplesmente uma
-                    simulação de texto da indústria
-                    tipográfica e de impressos, e vem
-                    sendo utilizado desde o século
-                    XVI, quando um impressor
-                    desconhecido pegou uma bandeja.</p>
+                <p class="paragrafo">O Sistema de Gestão de Comunicação Institucional foi criado para atender demandas
+                    do setor e assessoria de Comunicação Institucional da Universidade Federal do Agreste de Pernambuco
+                    (UFAPE). Atualmente, a ferramenta possibilita a geração de cartões de aniversário e de clipping
+                    customizados a partir da definição de plataforma de coleta dos dados.</p>
             </div>
         </div>
         <div class="row">

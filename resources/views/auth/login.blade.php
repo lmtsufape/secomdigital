@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="px-5 py-5" >
+    <div class="px-5 py-5">
         <div class="container">
             <div class="py-3 px-4 row ms-0 justify-content-between">
                 <div class="col-md-7">
@@ -13,13 +13,10 @@
                     </div>
                     <!--deixar o texto justificado-->
                     <div class="textoEntrada mt-2 text-justify" style="text-align: justify;">
-                        <p>A <b class="secom">secom digital</b> é um sistema
-                            lorem Ipsum é simplesmente uma
-                            simulação de texto da indústria
-                            tipográfica e de impressos, e vem
-                            sendo utilizado desde o século
-                            XVI, quando um impressor
-                            desconhecido pegou uma bandejass. </p>
+                        <p>O Sistema de Gestão de Comunicação Institucional foi criado para atender demandas do setor e
+                            assessoria de Comunicação Institucional da Universidade Federal do Agreste de Pernambuco
+                            (UFAPE). Atualmente, a ferramenta possibilita a geração de cartões de aniversário e de
+                            clipping customizados a partir da definição de plataforma de coleta dos dados.  </p>
                     </div>
                 </div>
                 <div class="col-md-3 caixa shadow p-3 bg-white">
