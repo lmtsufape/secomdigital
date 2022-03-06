@@ -20,27 +20,43 @@ class ImageController extends Controller
     // 	//dd($images);
     // 	return view('home', compact('images'));
     // }
+
+    public function imagem()
+    {
+        Storage::disk('public')->delete('temp.jpeg');
+        Imagem::where('title','temp')->delete();
+        $images = Imagem::orderBy('created_at', 'desc')->get();
+
+        return view('imagem.imagem', compact('images'));
+    }
     public function store(Request $request)
     {
         $request->validate([
             'filename' => 'required |image | mimes:jpg,jpeg,png,gif,bmp',
-
         ]);
+
+        $imagens = \App\Image::all();
+
+        foreach ($imagens as $imagem)
+        {
+            if($imagem->title == $request->title){
+                return redirect(route('imagem'))->with('fail', 'Já existe uma imagem cadastrada, apague a imagem para poder cadastrar outra.');
+            }
+        }
 
         $image = new Imagem();
         $image->title = $request->title;
         $image->file = $this->uploadFile($request);
         $image->save();
 
-        return redirect('/home')->with('message', 'Sua imagem foi adicionada com sucesso!');
+        return redirect(route('imagem'))->with('message', 'Sua imagem foi adicionada com sucesso!');
     }
 
     public function uploadFile($request)
     {
-
         if ($request->hasFile('filename')) {
             $image = $request->file('filename');
-            $filename = $image->getClientOriginalName();
+            $filename = $request->title.'.'.$request->filename->extension();
             $destination = storage_path('app/public');
 
             if ($image->move($destination, $filename)) {
