@@ -30,7 +30,7 @@
                                 >
                                     Servidores
                                 </a>
-                                <a class="dropdown-item" href="{{ route('home') }}"
+                                <a class="dropdown-item" href="{{ route('imagem') }}"
                                 >
                                     Cartões
                                 </a>

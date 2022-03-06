@@ -19,10 +19,14 @@ Route::group(['middleware' => ['auth']], function () {
         return view('welcome');
     })->name('index');
 
+    Route::get('/home', function () {
+        return view('welcome');
+    })->name('home');
+
     //Image
-    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('imagem', 'ImageController@imagem')->name('imagem');
     Route::post('imagem/store', 'ImageController@store')->name('image.store');
-    Route::post('imagem/apagar', 'ImageController@destroy')->name('image.destroy');
+    Route::get('imagem/apagar', 'ImageController@destroy')->name('image.destroy');
     Route::get('imagem/editar/{id}', 'ImageController@edit')->name('image.edit');
     Route::post('imagem/update', 'ImageController@update')->name('image.update');
     Route::get('imagem/baixar/{id}', 'ImageController@baixar')->name('image.baixar');
