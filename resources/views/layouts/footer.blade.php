@@ -1,53 +1,41 @@
-<div id="appRodape" class="navbar-light" style="background-color:#160730; padding-bottom:1vh; color:white">
-    <div class="container">
-        <div class="row justify-content-center"
-             style="border-bottom: #949494 2px solid; padding: 10px; font-weight: bold">
-            <div class="col-sm-3" align="center">
-                <div class="row justify-content-center" style="margin-top:15px;">
-                    <div class="col-sm-12 styleItemMapaDoSite" style=" font-family:arial"><a href="{{ route('home') }}">Início</a>
-                        ● <a href="{{ route('home') }}">Sobre</a></div>
+<footer class="container-fluid pt-1 pb-3" style="background-color: white">
+    <div class="container-fluid px-lg-5">
+        <div class="row justify-content-between align-items-center my-2">
+            <div class="col-md-4 text-center py-1">
+                <a class="navbar-brand mx-3" href="">
+                    <img width="200px" src="{{asset('img/logo_secomdigital_menu.png')}}">
+                </a>
+            </div>
+
+            <div class="col-md-4 text-center py-1">
+                <div class="form-row">
+                    <div class="col-md-12">
+                        <h6 style="color: #909090;">Desenvolvido por:</h6>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-12" style="margin-bottom: 1rem;">
+                        <div class="row justify-content-center" >
+                            <div class="col-md-2">
+                                <a href="http://ufape.edu.br/" target="_blank"><img src="{{ asset('img/logo_ufape_blue.png') }}" alt="Logo" width="30px;" style="float: right"></a>
+                            </div>
+                            <div class="col-md-4">
+                                <a href="http://lmts.uag.ufrpe.br/" target="_blank"><img src="{{ asset('img/logo_ufape_color.png') }}" alt="Logo" width="160px;" style="border-left: 1px rgba(0, 0, 255, 0.274) solid; padding-left: 15px;"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 text-center pb-4">
+                <span class="textoRodape">Redes sociais do lmts</span>
+                <div class="row justify-content-center text-center">
+                    <a href="https://www.instagram.com/lmts_ufape/" target="_blank" class="col-md-1 p-0"> <img height="30" src="{{asset('img/Icon awesome-instagram.svg')}}"></a>
+                    <a href="https://www.facebook.com/LMTSUFAPE/" target="_blank" class="col-md-1 p-0"> <img height="30" src="{{asset('img/Icon awesome-facebook.svg')}}"></a>
+                    <a href="mailto:lmts@ufrpe.br" class="col-md-1 p-0"> <img height="30" src="{{asset('img/Icon zocial-email.svg')}}"></a>
                 </div>
             </div>
         </div>
-        <div class="row justify-content-center">
-            <div class="col-sm-4" align="center">
-                <div class="row justify-content-center" style="margin-top:10px; margin-top:1.4rem;">
-                    <div class="col-sm-12" id="" style="font-weight:bold; font-family:arial; color:white">Desenvolvido
-                        por
-                    </div>
-                    <div style="margin:3px;">
-                        <a href="http://lmts.uag.ufrpe.br/" target="blank">
-                            <img src="{{ asset('/imagens/logo_lmts2.png') }}">
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4" align="center">
-                <div class="row justify-content-center" style="margin-top:10px; margin-top:1.4rem;">
-                    <div class="col-sm-12" id="" style="font-weight:bold; font-family:arial; color:white">Apoio</div>
-                    <div style="margin:3px;">
-                        <a href="http://ufape.edu.br/" target="blank">
-                            <img src="{{ asset('/imagens/logo_ufape.png') }}">
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4" align="center">
-                <div class="row justify-content-center" style="margin-top:10px; margin-top:1.4rem;">
-                    <div class="col-sm-12" id="" style="font-weight:bold; font-family:arial; color:white">Redes Sociais</div>
-                    <div style="margin:25px;">
-                        <a href="http://ufape.edu.br/" target="blank" class="mx-1">
-                            <img src="{{ asset('imagens/facebook.png') }}" width="40px" height="40px">
-                        </a>
-                        <a href="http://ufape.edu.br/" target="blank" class="mx-1">
-                            <img src="{{ asset('imagens/instagram.png') }}" width="40px" height="40px">
-                        </a>
-                        <a href="http://ufape.edu.br/" target="blank" class="mx-1">
-                            <img src="{{ asset('imagens/twitter.png') }}" width="50px" height="40px">
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <hr class="m-0 p-0">
     </div>
-</div>
+</footer>
