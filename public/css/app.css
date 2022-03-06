@@ -2227,3 +2227,36 @@ select {
 	}
 }
 
+.balao{
+
+	border-style: solid;
+	border-color: white;
+	border-radius: 15px;
+	background-color: #d9d9d9;
+}
+
+.secom{
+	color: #e40158;
+}
+
+.balaoText{
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-top: 10px;
+}
+
+.imgHome{
+	width: 420px;
+	height: 319px;
+}
+
+.crop {
+	overflow: hidden;
+	border: 5px solid #555;
+	border-radius: 25px;
+
+}
+
+.buttonHome{
+	width: 250px;
+}
