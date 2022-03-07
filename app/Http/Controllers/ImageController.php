@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Cartao;
 use Illuminate\Http\Request;
 use App\Image as Imagem;
 use App\Font;
@@ -84,8 +85,9 @@ class ImageController extends Controller
     {
         $imagemOriginal = Imagem::find($id);
         $fonts = Font::all();
+        $cartao = Cartao::where('image_id', $id)->first();
         //dd($fonts);
-        return view('imagem.edit', ['imagemOriginal' => $imagemOriginal, 'fonts' => $fonts]);
+        return view('imagem.edit', ['imagemOriginal' => $imagemOriginal, 'fonts' => $fonts, 'cartao' => $cartao]);
     }
 
     public function definirFont()
@@ -96,8 +98,8 @@ class ImageController extends Controller
 
     public function update(Request $request)
     {
-
         $image = Imagem::find($request->image_id);
+        $cartao = Cartao::where('image_id', $request->image_id)->first();
         $fonte = Font::find($request->font_id);
         $fontes = Font::all();
         $img = Image::make(storage_path('app/public/') . $image->file);
@@ -108,7 +110,7 @@ class ImageController extends Controller
 
 
         //dd($path);
-        $img->text($request->nome, $eixoX, $eixoY, function ($font) use ($path, $size) {
+        $img->text($request->texto, $eixoX, $eixoY, function ($font) use ($path, $size) {
             $font->file($path);
             //dd($path);
             $font->size($size); //defininindo o tamanho como 20
@@ -132,11 +134,13 @@ class ImageController extends Controller
             'imagemOriginal' => $image,
             'imagemGerada' => $imagemGerada,
             'fonts' => $fontes,
+            'fontTestada' => $fonte,
             'eixo_x' => $eixoX,
             'eixo_y' => $eixoY,
             'size' => $size,
             'fonte' => $request->font_id,
-            'nome' => $request->nome
+            'texto' => $request->texto,
+            'cartao' => $cartao
         ])->with(['message' => 'Cartão gerado com sucesso!']);
     }
 
