@@ -25,7 +25,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->call('App\Http\Controllers\ClippingController@gerarEmail')->timezone('America/Sao_Paulo')->fridays()->at('17:59');
+        //$schedule->call('App\Http\Controllers\ClippingController@gerarEmail')->timezone('America/Sao_Paulo')->fridays()->at('17:59');
+        $schedule->call('App\Http\Controllers\ImageController@envioAutomaticoCartao')->timezone('America/Sao_Paulo')->dailyAt('06:00');
     }
 
     /**

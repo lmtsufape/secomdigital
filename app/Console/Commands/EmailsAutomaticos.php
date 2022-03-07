@@ -39,6 +39,6 @@ class EmailsAutomaticos extends Command
      */
     public function handle()
     {
-        Route('clipping.enviarEmail');
+        //Route('clipping.enviarEmail');
     }
 }

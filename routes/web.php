@@ -23,6 +23,10 @@ Route::group(['middleware' => ['auth']], function () {
         return view('welcome');
     })->name('home');
 
+    Route::get('teste2', function (){
+       return view('emails.cartaoServidor');
+    });
+
     //Image
     Route::get('imagem', 'ImageController@imagem')->name('imagem');
     Route::post('imagem/store', 'ImageController@store')->name('image.store');
@@ -31,6 +35,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('imagem/update', 'ImageController@update')->name('image.update');
     Route::get('imagem/baixar/{id}', 'ImageController@baixar')->name('image.baixar');
     Route::post('imagem/baixarImagem', 'ImageController@baixarImagem')->name('image.baixarImagem');
+    Route::get('teste', 'ImageController@envioAutomaticoCartao')->name('teste');
 
 //Servidores
     Route::get('/servidor/index', 'ServidorController@index')->name('servidor.index');

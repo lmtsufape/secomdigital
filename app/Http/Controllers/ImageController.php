@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Servidor;
 use Illuminate\Http\Request;
 use App\Image as Imagem;
 use App\Font;
@@ -24,11 +25,12 @@ class ImageController extends Controller
     public function imagem()
     {
         Storage::disk('public')->delete('temp.jpeg');
-        Imagem::where('title','temp')->delete();
+        Imagem::where('title', 'temp')->delete();
         $images = Imagem::orderBy('created_at', 'desc')->get();
 
         return view('imagem.imagem', compact('images'));
     }
+
     public function store(Request $request)
     {
         $request->validate([
@@ -37,9 +39,8 @@ class ImageController extends Controller
 
         $imagens = \App\Image::all();
 
-        foreach ($imagens as $imagem)
-        {
-            if($imagem->title == $request->title){
+        foreach ($imagens as $imagem) {
+            if ($imagem->title == $request->title) {
                 return redirect(route('imagem'))->with('fail', 'Já existe uma imagem cadastrada, apague a imagem para poder cadastrar outra.');
             }
         }
@@ -52,11 +53,25 @@ class ImageController extends Controller
         return redirect(route('imagem'))->with('message', 'Sua imagem foi adicionada com sucesso!');
     }
 
+    public function envioAutomaticoCartao()
+    {
+        $servidores = Servidor::all();
+        $hoje = date('d-m', strtotime(today()));
+        $aniver = date('d-m', strtotime('1973-05-13'));
+        foreach ($servidores as $servidor) {
+            $servidorAniver = date('d-m', strtotime($servidor->data_nascimento));
+            if($aniver == $servidorAniver)
+            {
+
+            }
+        }
+    }
+
     public function uploadFile($request)
     {
         if ($request->hasFile('filename')) {
             $image = $request->file('filename');
-            $filename = $request->title.'.'.$request->filename->extension();
+            $filename = $request->title . '.' . $request->filename->extension();
             $destination = storage_path('app/public');
 
             if ($image->move($destination, $filename)) {
@@ -89,6 +104,11 @@ class ImageController extends Controller
     }
 
     public function definirFont()
+    {
+
+    }
+
+    public function gerarImagem()
     {
 
     }
