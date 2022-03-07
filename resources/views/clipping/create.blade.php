@@ -7,46 +7,47 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-sm-12">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Geração de clipping da UFAPE</h5>
-                        <div class="d-flex justify-content-center">
-                            @if (session('status'))
-                                <div class="alert alert-success">
-                                    {{ session('status') }}
+            <div class="row" style="margin:auto;margin-top: 100px">
+                <div class="col-sm-7" style="padding-left: 30px;margin:auto " align="center" >
+                    <br>
+                    <h2 align="center">Geração de <b class="secom">clipping</b> da UFAPE</h2>
+                    <div class="balao" style="background-color: white;">
+
+                        <h3 class="mx-3" style="margin-top: 10px;" align="center">Selecione um periodo</h3>
+                        <hr style="border-color: white; width: 92%; padding: 0px; margin-top: -10px;  margin: auto; margin-bottom: 10px" ></hr>
+                        <form method="post" id="formGerar" action="{{ route('clipping.gerar') }}">
+                            @csrf
+                            <div class="row d-flex mx-1">
+                                <div class="col-sm-3">
+                                    <label><b>De:</b></label>
+                                    <input name="dataInicio" placeholder="dd/mm/aaaa" style="width: 120px" required
+                                           class="form-control @error('dataInicio') is-invalid @enderror"
+                                           value="{{date("d/m/Y", strtotime("-1 week"))}}">
                                 </div>
-                            @endif
-                            <form method="post" id="formGerar" action="{{ route('clipping.gerar') }}">
-                                @csrf
-                                <br>
-                                <div class="row d-flex">
-                                    <div class="col-sm-5">
-                                        <label>Data Inicial</label>
-                                        <input readonly name="dataInicio" placeholder="dd/mm/aaaa" required
-                                               class="form-control @error('dataInicio') is-invalid @enderror"
-                                               value="{{date("d/m/Y", strtotime("-1 week"))}}">
-                                    </div>
-                                    <div class="col-sm-6" id="dataFinal">
-                                        <div class="row">
-                                            <div class="col-sm-10">
-                                                <label>Data Final</label>
-                                                <input readonly name="dataFinal" placeholder="dd/mm/aaaa" required
-                                                       class="form-control @error('dataFinal') is-invalid @enderror"
-                                                       value="{{date("d/m/Y")}}">
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="col-sm-3">
+                                    <label><b>Até:</b></label>
+                                    <input name="dataFinal" placeholder="dd/mm/aaaa" style="width: 120px" required
+                                           class="form-control @error('dataFinal') is-invalid @enderror"
+                                           value="{{date("d/m/Y")}}">
                                 </div>
 
-                                <br>
+                                <div class="col-sm-3" align="center">
+                                    <a type="button" href="javascript:history.back()" class="btn btn-danger" id="cancelar"
+                                       style="margin-top: 20px;width: 100%;">Cancelar
+                                    </a>
+                                </div>
 
-                                <button type="submit" class="btn btn-primary" id="gerar">Gerar Clipping</button>
-                            </form>
+                                <div class="col-sm-3" align="center">
+                                    <button type="submit" class="btn btn-primary" id="gerar" style="margin-top: 20px;width: 100%;">Gerar Clipping
+                                    </button>
+                                </div>
 
-                        </div>
+                            </div>
+                            <br>
+                        </form>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
