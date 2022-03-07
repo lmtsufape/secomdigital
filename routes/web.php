@@ -32,7 +32,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('imagem/store', 'ImageController@store')->name('image.store');
     Route::get('imagem/apagar', 'ImageController@destroy')->name('image.destroy');
     Route::get('imagem/editar/{id}', 'ImageController@edit')->name('image.edit');
-    Route::post('imagem/update', 'ImageController@update')->name('image.update');
+    Route::get('imagem/update', 'ImageController@update')->name('image.update');
     Route::get('imagem/baixar/{id}', 'ImageController@baixar')->name('image.baixar');
     Route::post('imagem/baixarImagem', 'ImageController@baixarImagem')->name('image.baixarImagem');
     Route::get('teste', 'ImageController@envioAutomaticoCartao')->name('teste');
@@ -50,6 +50,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('clipping/create', 'ClippingController@create')->name('clipping.create');
     Route::post('clipping/gerar', 'ClippingController@gerar')->name('clipping.gerar');
     Route::post('clipping/enviarEmail', 'ClippingController@gerarEmail')->name('clipping.enviarEmail');
+
+//Cartao
+    Route::post('cartao/create', 'CartaoController@criar')->name('cartao.criar');
+    Route::post('cartao/atualizar', 'CartaoController@atualizar')->name('cartao.atualizar');
+
 });
 
 
