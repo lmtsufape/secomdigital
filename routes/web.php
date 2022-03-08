@@ -23,6 +23,10 @@ Route::group(['middleware' => ['auth']], function () {
         return view('welcome');
     })->name('home');
 
+    Route::get('teste2', function (){
+       return view('emails.cartaoServidor');
+    });
+
     //Image
     Route::get('imagem', 'ImageController@imagem')->name('imagem');
     Route::post('imagem/store', 'ImageController@store')->name('image.store');
@@ -31,6 +35,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('imagem/update', 'ImageController@update')->name('image.update');
     Route::get('imagem/baixar/{id}', 'ImageController@baixar')->name('image.baixar');
     Route::post('imagem/baixarImagem', 'ImageController@baixarImagem')->name('image.baixarImagem');
+    Route::get('cartao', 'ImageController@envioAutomaticoCartao')->name('image.enviarCartao');
 
 //Servidores
     Route::get('/servidor/index', 'ServidorController@index')->name('servidor.index');
@@ -39,12 +44,13 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('servidor/{id}/edit', 'ServidorController@edit')->name('servidor.edit');
     Route::post('servidor/update/{id}', 'ServidorController@update')->name('servidor.update');
     Route::get('servidor/destroy/{id}', 'ServidorController@destroy')->name('servidor.destroy');
-    Route::post('servidor/enviarCartao', 'ServidorController@enviarEmail')->name('servidor.enviarEmail');
+    Route::get('servidor/enviarCartao', 'ServidorController@enviarEmail')->name('servidor.enviarEmail');
+
 
 //Clipping
     Route::get('clipping/create', 'ClippingController@create')->name('clipping.create');
     Route::post('clipping/gerar', 'ClippingController@gerar')->name('clipping.gerar');
-    Route::post('clipping/enviarEmail', 'ClippingController@gerarEmail')->name('clipping.enviarEmail');
+    Route::get('clipping/enviarEmail', 'ClippingController@gerarEmail')->name('clipping.enviarEmail');
 
 //Cartao
     Route::post('cartao/create', 'CartaoController@criar')->name('cartao.criar');

@@ -2,9 +2,11 @@
 
 namespace App\Mail;
 
+use App\Image;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Message;
 use Illuminate\Queue\SerializesModels;
 
 class CartaoServidor extends Mailable
@@ -21,17 +23,17 @@ class CartaoServidor extends Mailable
      *
      * @return void
      */
-     public function __construct($path)
-     {
+    public function __construct($path)
+    {
         $this->path = $path;
-     }
-     // public function __construct($user, $subject, $evento, $trabalho)
-     // {
-     //     $this->user = $user;
-     //     $this->subject = $subject;
-     //     $this->evento = $evento;
-     //     $this->trabalho = $trabalho;
-     // }
+    }
+    // public function __construct($user, $subject, $evento, $trabalho)
+    // {
+    //     $this->user = $user;
+    //     $this->subject = $subject;
+    //     $this->evento = $evento;
+    //     $this->trabalho = $trabalho;
+    // }
     /**
      * Build the message.
      *
@@ -39,7 +41,10 @@ class CartaoServidor extends Mailable
      */
     public function build()
     {
-      return $this->view('emails.CartaoServidor')
-               ->attach($this->path);
+        $imagem = Image::where('title','=', 'temp')->first();
+        $imagem->path = $this->path;
+        $this->subject('Feliz Aniversário Servidor!');
+        return $this->markdown('emails.CartaoServidor', compact('imagem'))
+            ->attach($this->path, ['as' => 'FelizAniversario.jpg']);
     }
 }

@@ -4,21 +4,21 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
-class EmailsAutomaticos extends Command
+class CartoesAutomaticos extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'Enviar:Emails';
+    protected $signature = 'cartoesAutomaticos:cron';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Enviar Emails do Clipping Automaticamente';
+    protected $description = 'Command description';
 
     /**
      * Create a new command instance.
@@ -37,6 +37,6 @@ class EmailsAutomaticos extends Command
      */
     public function handle()
     {
-        Route('clipping.enviarEmail');
+        Route('image.enviarCartao');
     }
 }

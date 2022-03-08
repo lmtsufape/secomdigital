@@ -64,7 +64,5 @@ class ServidorController extends Controller
       $path = $request->image;
       Mail::to($request->email)
           ->send(new CartaoServidor($path));
-      return view('imagem.edit', ['imagemOriginal'=> $imagemOriginal, 'fonts' => $fonts]);
-
     }
 }
