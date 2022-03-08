@@ -48,12 +48,14 @@
 
                         @if($cartao)
                             {{-- Editar de Cartão --}}
-                            <form id="form" action="{{route('cartao.atualizar')}}" method="POST" enctype="multipart/form-data">
+                            <form id="form" action="{{route('cartao.atualizar')}}" method="POST"
+                                  enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
                                     <label>Nome do Aniversáriante:</label>
                                     <input type="text" name="texto" class="form-control"
-                                           placeholder="Ex: Feliz Aniversário Fulano" value="{{$cartao->texto}}" required>
+                                           placeholder="Ex: Feliz Aniversário Fulano" required
+                                           @if(isset($texto))value="{{$texto}}" @else value="{{$cartao->texto}}" @endif>
                                     <input type="hidden" name="image_id" value="{{ $imagemOriginal->id }}">
                                     <input type="hidden" name="cartao_id" value="{{ $cartao->id }}">
                                     <input type="hidden" name="flag" id="flag" value="0">
@@ -63,10 +65,20 @@
                                     <select class="form-control" name="font_id" id="exampleFormControlSelect1" required>
 
                                         @foreach($fonts as $font)
-                                            @if($cartao->fonte->id == $font->id)
-                                                <option selected value="{{ $font->id }}">{{ $font->font_name }}</option>
+                                            @if(isset($fontTestada))
+                                                @if( $fontTestada->id == $font->id)
+                                                    <option selected
+                                                            value="{{ $font->id }}">{{ $font->font_name }}</option>
+                                                @else
+                                                    <option value="{{ $font->id }}">{{ $font->font_name }}</option>
+                                                @endif
                                             @else
-                                                <option value="{{ $font->id }}">{{ $font->font_name }}</option>
+                                                @if($cartao->fonte->id == $font->id)
+                                                    <option selected
+                                                            value="{{ $font->id }}">{{ $font->font_name }}</option>
+                                                @else
+                                                    <option value="{{ $font->id }}">{{ $font->font_name }}</option>
+                                                @endif
                                             @endif
                                         @endforeach
                                     </select>
@@ -75,25 +87,34 @@
                                     <div class="col-3">
                                         <label for="formGroupExampleInput">Eixo X:</label>
                                         <input type="number" class="form-control" name="eixo_x" placeholder="Ex: 4100"
-                                               id="formGroupExampleInput" required value="{{$cartao->eixo_x}}">
+                                               id="formGroupExampleInput" required
+                                               @if(isset($eixo_x))value="{{$eixo_x}}"
+                                               @else value="{{$cartao->eixo_x}} @endif">
                                     </div>
                                     <div class="col-3">
                                         <label for="formGroupExampleInput">Eixo Y:</label>
                                         <input type="number" class="form-control" name="eixo_y" placeholder="Ex: 400"
-                                               id="formGroupExampleInput" required value="{{$cartao->eixo_y}}">
+                                               id="formGroupExampleInput" required
+                                               @if(isset($eixo_y))value="{{$eixo_y}}"
+                                               @else value="{{$cartao->eixo_y}} @endif">
                                     </div>
                                     <div class="col-3">
                                         <label for="formGroupExampleInput">Tamanho:</label>
                                         <input type="number" class="form-control" name="size" placeholder="Ex: 250"
-                                               id="formGroupExampleInput" required value="{{$cartao->tamanho}}">
+                                               id="formGroupExampleInput" required
+                                               @if(isset($size))value="{{$size}}"
+                                               @else value="{{$cartao->tamanho}} @endif">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-2">
-                                        <button id="atualizar" class="btn btn-success mt-2" type="submit">Atualizar dados</button>
+                                        <button id="atualizar" class="btn btn-success mt-2" type="submit">Atualizar
+                                            dados
+                                        </button>
                                     </div>
                                     <div class="col-sm-2">
-                                        <button id="gerar" class="btn btn-success mt-2" type="submit">Gerar cartão</button>
+                                        <button id="gerar" class="btn btn-success mt-2" type="submit">Gerar cartão
+                                        </button>
                                     </div>
                                 </div>
                                 <br>
@@ -106,12 +127,14 @@
 
                             {{-- Criação de Cartão --}}
 
-                            <form id="form2" action="{{route('cartao.criar')}}" method="POST" enctype="multipart/form-data">
+                            <form id="form2" action="{{route('cartao.criar')}}" method="POST"
+                                  enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
                                     <label>Texto:</label>
                                     <input type="text" name="texto" class="form-control"
-                                           placeholder="Ex: Feliz Aniversário Fulano" @if(isset($texto))value="{{$texto}}"@endif required>
+                                           placeholder="Ex: Feliz Aniversário Fulano"
+                                           @if(isset($texto))value="{{$texto}}" @endif required>
                                     <input type="hidden" name="image_id" value="{{ $imagemOriginal->id }}">
                                     <input type="hidden" name="flag" id="flag" value="0">
                                 </div>
@@ -134,25 +157,30 @@
                                     <div class="col-3">
                                         <label for="formGroupExampleInput">Eixo X:</label>
                                         <input type="number" class="form-control" name="eixo_x" placeholder="Ex: 4100"
-                                               id="formGroupExampleInput" @if(isset($eixo_x))value="{{$eixo_x}}"@endif required>
+                                               id="formGroupExampleInput" @if(isset($eixo_x))value="{{$eixo_x}}"
+                                               @endif required>
                                     </div>
                                     <div class="col-3">
                                         <label for="formGroupExampleInput">Eixo Y:</label>
                                         <input type="number" class="form-control" name="eixo_y" placeholder="Ex: 400"
-                                               id="formGroupExampleInput" @if(isset($eixo_y))value="{{$eixo_y}}"@endif required>
+                                               id="formGroupExampleInput" @if(isset($eixo_y))value="{{$eixo_y}}"
+                                               @endif required>
                                     </div>
                                     <div class="col-3">
                                         <label for="formGroupExampleInput">Tamanho:</label>
                                         <input type="number" class="form-control" name="size" placeholder="Ex: 250"
-                                               id="formGroupExampleInput" @if(isset($size))value="{{$size}}"@endif required>
+                                               id="formGroupExampleInput" @if(isset($size))value="{{$size}}"
+                                               @endif required>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-2">
-                                        <button id="salvar" class="btn btn-success mt-2" type="submit">Salvar dados</button>
+                                        <button id="salvar" class="btn btn-success mt-2" type="submit">Salvar dados
+                                        </button>
                                     </div>
                                     <div class="col-sm-2">
-                                        <button id="gerar" class="btn btn-success mt-2" type="submit">Gerar cartão</button>
+                                        <button id="gerar" class="btn btn-success mt-2" type="submit">Gerar cartão
+                                        </button>
                                     </div>
                                 </div>
                                 <br>
@@ -161,7 +189,6 @@
 
                             {{-- Fim da criação do Cartão--}}
                         @endif
-
 
 
                     </div>
@@ -213,8 +240,8 @@
 
     </script>--}}
     <script type="text/javascript">
-        document.getElementById('gerar').onclick = function() {
-            document.getElementById('flag').value="1";
+        document.getElementById('gerar').onclick = function () {
+            document.getElementById('flag').value = "1";
         }
     </script>
 @endsection

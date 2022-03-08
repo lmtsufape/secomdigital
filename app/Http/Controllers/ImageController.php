@@ -27,7 +27,8 @@ class ImageController extends Controller
 
     public function imagem()
     {
-        $images = Imagem::orderBy('created_at', 'desc')->get();
+       // $images = Imagem::orderBy('created_at', 'desc')->get();
+          $images = Imagem::where('title', 'cartaobackground')->get();
 
         return view('imagem.imagem', compact('images'));
     }
