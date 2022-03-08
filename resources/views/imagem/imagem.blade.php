@@ -31,11 +31,12 @@
         @endif
 
 
-        <div class="album bg-light">
+        <div class="album" style="background-color: #ffffff; border-radius: 5px">
             <div class="container">
                 <div class="row">
                     @if($images->count() < 1 )
-                        <h1 class="text-center">Envio de Background para os Cartões de Aniversário</h1>
+                        <h1 class="text-center py-10">Envio de Background para os <b class="secom">Cartões de Aniversário</b>
+                        </h1>
                         <div class="container">
 
                             <form action="{{ route('image.store') }}" method="POST" enctype="multipart/form-data">
@@ -43,12 +44,21 @@
                                 <div class="form-group">
                                     <input type="hidden" name="title" class="form-control" value="cartaobackground">
                                 </div>
-                                <div class="form-group">
-                                    <label> Imagem </label>
-                                    <input type="file" name="filename">
-                                </div>
-                                <div class="form-group" style="margin-bottom: 10px; margin-top: 10px">
-                                    <button class="btn btn-success" type="submit">Enviar Imagem</button>
+                                <div class="text-center">
+                                    <div class="form-group">
+                                            <div class="border-1" style="width: 20%; margin-left: auto; margin-right: auto">
+                                                <label> Selecionar Background:</label>
+                                                <label id="fileLabel" for="file" class="btn btn-primary btn-block btn-outlined" style="width: 24%"><i
+                                                            class="fa-solid fa-camera fa-xl"></i></label>
+                                                <input type="file" id="file" name="filename" style="display: none">
+                                            </div>
+
+
+                                    </div>
+                                    <div class="form-group" style="margin-bottom: 10px; margin-top: 10px;">
+                                        <button class="btn btn-success" type="submit">Enviar Imagem <i
+                                                    class="fa-solid fa-arrow-up-from-bracket"></i></button>
+                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -85,4 +95,10 @@
         </div>
 
     </div>
+
+    <script>
+        $( "#file" ).change(function() {
+            $('#fileLabel').css('background-color', 'green')
+        });
+    </script>
 @endsection
