@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\CartaoServidor;
 use App\Servidor;
 use App\Cartao;
 use Illuminate\Http\Request;
 use App\Image as Imagem;
 use App\Font;
+use Illuminate\Support\Facades\Mail;
 use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\File;
@@ -25,8 +27,6 @@ class ImageController extends Controller
 
     public function imagem()
     {
-        Storage::disk('public')->delete('temp.jpeg');
-        Imagem::where('title', 'temp')->delete();
         $images = Imagem::orderBy('created_at', 'desc')->get();
 
         return view('imagem.imagem', compact('images'));
@@ -54,16 +54,51 @@ class ImageController extends Controller
         return redirect(route('imagem'))->with('message', 'Sua imagem foi adicionada com sucesso!');
     }
 
+    public function gerarImagem()
+    {
+        $cartao = Cartao::all()->first();
+        if($cartao != null)
+        {
+            $fonte = Font::find($cartao->font_id);
+            $image = Imagem::find($cartao->image_id);
+            $img = Image::make(storage_path('app/public/') . $image->file);
+            $path = public_path("font/") . $fonte->font_name . ".ttf";
+            $eixoX = $cartao->eixo_x;
+            $eixoY = $cartao->eixo_y;
+            $size = $cartao->tamanho;
+
+            $img->text($cartao->texto, $eixoX, $eixoY, function ($font) use ($path, $size) {
+                $font->file($path);
+                //dd($path);
+                $font->size($size); //defininindo o tamanho como 20
+                //dd($font);
+                $font->color('#ffffff'); //definindo a cor como branco
+
+                $font->align('right'); //definindo o alinhamento como centralizado
+
+            });
+        }
+
+        $imagemGerada = new Imagem();
+        $imagemGerada->title = 'temp';
+        $imagemGerada->file = 'temp' . '.' . $img->extension;
+        $imagemGerada->path = storage_path('app/public/') . $imagemGerada->file;
+        return $imagemGerada->path;
+    }
+
     public function envioAutomaticoCartao()
     {
         $servidores = Servidor::all();
         $hoje = date('d-m', strtotime(today()));
         $aniver = date('d-m', strtotime('1973-05-13'));
+        $imagemOriginal = Imagem::where('title', 'cartaobackground')->first();
         foreach ($servidores as $servidor) {
             $servidorAniver = date('d-m', strtotime($servidor->data_nascimento));
             if($aniver == $servidorAniver)
             {
-
+                $path = $this->gerarImagem();
+                Mail::to($servidor->email)
+                    ->send(new CartaoServidor($path));
             }
         }
     }
@@ -106,11 +141,6 @@ class ImageController extends Controller
     }
 
     public function definirFont()
-    {
-
-    }
-
-    public function gerarImagem()
     {
 
     }
