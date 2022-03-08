@@ -57,8 +57,7 @@ class ImageController extends Controller
     public function gerarImagem()
     {
         $cartao = Cartao::all()->first();
-        if($cartao != null)
-        {
+        if ($cartao != null) {
             $fonte = Font::find($cartao->font_id);
             $image = Imagem::find($cartao->image_id);
             $img = Image::make(storage_path('app/public/') . $image->file);
@@ -94,8 +93,7 @@ class ImageController extends Controller
         $imagemOriginal = Imagem::where('title', 'cartaobackground')->first();
         foreach ($servidores as $servidor) {
             $servidorAniver = date('d-m', strtotime($servidor->data_nascimento));
-            if($aniver == $servidorAniver)
-            {
+            if ($aniver == $servidorAniver) {
                 $path = $this->gerarImagem();
                 Mail::to($servidor->email)
                     ->send(new CartaoServidor($path));
@@ -171,10 +169,13 @@ class ImageController extends Controller
 
         });
 
+        $imgTemp = Imagem::where('title', 'temp')->first();
         $imagemGerada = new Imagem();
         $imagemGerada->title = 'temp';
         $imagemGerada->file = 'temp' . '.' . $img->extension;
-        $imagemGerada->save();
+        if ($imgTemp == null) {
+            $imagemGerada->save();
+        }
         $imagemGerada->path = storage_path('app/public/') . $imagemGerada->file;
         $img->save(storage_path('app/public/') . $imagemGerada->file);
 
