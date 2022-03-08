@@ -80,7 +80,7 @@
                     <hr style="border-color: white; width: 92%; padding: 0px; margin-top: -10px;  margin: auto; margin-bottom: 10px" ></hr>
 
                     <div class="col-sm-6" align="center">
-                        <a type="button" href="{{ route('home') }}" class="btn btn-primary buttonHome" id="gerar" style="margin-top: 20px;margin-bottom: 20px">Gerar Cartões
+                        <a type="button" href="{{ route('imagem') }}" class="btn btn-primary buttonHome" id="gerar" style="margin-top: 20px;margin-bottom: 20px">Gerar Cartões
                         </a>
                     </div>
                 </div>
