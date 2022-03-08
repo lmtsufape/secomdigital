@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="container py-6">
+        <h2 class="py-6 text-center">Configuração e Teste da Geração de <b class="secom">Cartão de Aniversário</b></h2>
         @if(isset($imagemGerada))
             <div class="card  mb-5">
                 <div class="card-header">
@@ -50,7 +51,7 @@
                             <form id="form" action="{{route('cartao.atualizar')}}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
-                                    <label>Texto:</label>
+                                    <label>Nome do Aniversáriante:</label>
                                     <input type="text" name="texto" class="form-control"
                                            placeholder="Ex: Feliz Aniversário Fulano" value="{{$cartao->texto}}" required>
                                     <input type="hidden" name="image_id" value="{{ $imagemOriginal->id }}">

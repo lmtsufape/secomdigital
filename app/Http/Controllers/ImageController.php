@@ -54,7 +54,7 @@ class ImageController extends Controller
         return redirect(route('imagem'))->with('message', 'Sua imagem foi adicionada com sucesso!');
     }
 
-    public function gerarImagem()
+    public function gerarImagem($texto)
     {
         $cartao = Cartao::all()->first();
         if ($cartao != null) {
@@ -66,21 +66,23 @@ class ImageController extends Controller
             $eixoY = $cartao->eixo_y;
             $size = $cartao->tamanho;
 
-            $img->text($cartao->texto, $eixoX, $eixoY, function ($font) use ($path, $size) {
+            $img->text($texto, $eixoX, $eixoY, function ($font) use ($path, $size) {
                 $font->file($path);
                 //dd($path);
                 $font->size($size); //defininindo o tamanho como 20
                 //dd($font);
                 $font->color('#ffffff'); //definindo a cor como branco
 
-                $font->align('right'); //definindo o alinhamento como centralizado
+                $font->align('left'); //definindo o alinhamento como centralizado
 
             });
         }
 
+
         $imagemGerada = new Imagem();
         $imagemGerada->title = 'temp';
         $imagemGerada->file = 'temp' . '.' . $img->extension;
+        $img->save(storage_path('app/public/') . $imagemGerada->file);
         $imagemGerada->path = storage_path('app/public/') . $imagemGerada->file;
         return $imagemGerada->path;
     }
@@ -92,9 +94,10 @@ class ImageController extends Controller
         $aniver = date('d-m', strtotime('1973-05-13'));
         $imagemOriginal = Imagem::where('title', 'cartaobackground')->first();
         foreach ($servidores as $servidor) {
+            $nomes = explode(" ", $servidor->nome);
             $servidorAniver = date('d-m', strtotime($servidor->data_nascimento));
             if ($aniver == $servidorAniver) {
-                $path = $this->gerarImagem();
+                $path = $this->gerarImagem($nomes[0]);
                 Mail::to($servidor->email)
                     ->send(new CartaoServidor($path));
             }
@@ -161,11 +164,11 @@ class ImageController extends Controller
         $img->text($request->texto, $eixoX, $eixoY, function ($font) use ($path, $size) {
             $font->file($path);
             //dd($path);
-            $font->size($size); //defininindo o tamanho como 20
+            $font->size($size);
             //dd($font);
-            $font->color('#ffffff'); //definindo a cor como branco
+            $font->color('#ffffff');
 
-            $font->align('right'); //definindo o alinhamento como centralizado
+            $font->align('left');
 
         });
 
