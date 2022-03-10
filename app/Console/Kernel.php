@@ -27,8 +27,8 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         //$schedule->call('App\Http\Controllers\ClippingController@gerarEmail')->timezone('America/Sao_Paulo')->everyMinute();
-        //$schedule->call('App\Http\Controllers\ImageController@envioAutomaticoCartao')->timezone('America/Sao_Paulo')->dailyAt('06:00');
-        $schedule->call('App\Http\Controllers\ImageController@envioAutomaticoCartao')->timezone('America/Sao_Paulo')->everyMinute();
+        $schedule->call('App\Http\Controllers\ImageController@envioAutomaticoCartao')->timezone('America/Sao_Paulo')->dailyAt('06:00');
+        //$schedule->call('App\Http\Controllers\ImageController@envioAutomaticoCartao')->timezone('America/Sao_Paulo')->everyMinute();
     }
 
     /**

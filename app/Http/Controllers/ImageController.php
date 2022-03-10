@@ -97,7 +97,7 @@ class ImageController extends Controller
         foreach ($servidores as $servidor) {
             $nomes = explode(" ", $servidor->nome);
             $servidorAniver = date('d-m', strtotime($servidor->data_nascimento));
-            if ($aniver == $servidorAniver) {
+            if ($hoje == $servidorAniver) {
                 $path = $this->gerarImagem($nomes[0]);
                 Mail::to($servidor->email)
                     ->send(new CartaoServidor($path));
