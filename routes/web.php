@@ -50,7 +50,7 @@ Route::group(['middleware' => ['auth']], function () {
 //Clipping
     Route::get('clipping/create', 'ClippingController@create')->name('clipping.create');
     Route::post('clipping/gerar', 'ClippingController@gerar')->name('clipping.gerar');
-    Route::get('clipping/enviarEmail', 'ClippingController@gerarEmail')->name('clipping.enviarEmail');
+    Route::post('clipping/enviarEmail', 'ClippingController@gerarEmail')->name('clipping.enviarEmail');
 
 //Cartao
     Route::post('cartao/create', 'CartaoController@criar')->name('cartao.criar');
