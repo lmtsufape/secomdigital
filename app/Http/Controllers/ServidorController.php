@@ -64,5 +64,6 @@ class ServidorController extends Controller
       $path = $request->image;
       Mail::to($request->email)
           ->send(new CartaoServidor($path));
+      return redirect()->back()->with(['mensagem'=>"Cartão Enviado com Sucesso!"]);
     }
 }

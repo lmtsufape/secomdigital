@@ -44,7 +44,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('servidor/{id}/edit', 'ServidorController@edit')->name('servidor.edit');
     Route::post('servidor/update/{id}', 'ServidorController@update')->name('servidor.update');
     Route::get('servidor/destroy/{id}', 'ServidorController@destroy')->name('servidor.destroy');
-    Route::get('servidor/enviarCartao', 'ServidorController@enviarEmail')->name('servidor.enviarEmail');
+    Route::post('servidor/enviarCartao', 'ServidorController@enviarEmail')->name('servidor.enviarEmail');
 
 
 //Clipping
