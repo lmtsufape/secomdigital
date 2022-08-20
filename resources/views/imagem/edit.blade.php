@@ -1,6 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
+    @if(session('mensagem'))
+        <div class="col-sm-12">
+            <br>
+            <div class="alert alert-success">
+                <p>{{session('mensagem')}}</p>
+            </div>
+        </div>
+    @endif
     <div class="container py-6">
         <h2 class="py-6 text-center">Configuração e Teste da Geração de <b class="secom">Cartão de Aniversário</b></h2>
         @if(isset($imagemGerada))
