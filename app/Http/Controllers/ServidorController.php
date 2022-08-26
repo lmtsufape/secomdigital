@@ -57,13 +57,9 @@ class ServidorController extends Controller
     }
 
     public function enviarEmail(Request $request){
-      $imagemOriginal = Imagem::find($request->id);
-      $fonts = Font::all();
-      //dd($request->id);
-      $subject = "Evento Criado";
       $path = $request->image;
-      Mail::to($request->email)
-          ->send(new CartaoServidor($path));
+        Mail::to($request->email)
+            ->send(new CartaoServidor($path));
       return redirect()->back()->with(['mensagem'=>"Cartão Enviado com Sucesso!"]);
     }
 }

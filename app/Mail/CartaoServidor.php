@@ -41,10 +41,9 @@ class CartaoServidor extends Mailable
      */
     public function build()
     {
-        $imagem = Image::where('title','=', 'temp')->first();
-        $imagem->path = $this->path;
-        $this->subject('Feliz Aniversário Servidor!');
-        return $this->markdown('emails.CartaoServidor', compact('imagem'))
+        return $this->subject('Feliz Aniversário!')
+            ->from('naoresponder.lmts@gmail.com','Secom - LMTS')
+            ->view('emails.CartaoServidor')
             ->attach($this->path, ['as' => 'FelizAniversario.jpg']);
     }
 }
