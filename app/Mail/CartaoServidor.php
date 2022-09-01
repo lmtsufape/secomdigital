@@ -42,8 +42,7 @@ class CartaoServidor extends Mailable
     public function build()
     {
         return $this->subject('Feliz Aniversário!')
-            ->from('naoresponder.lmts@gmail.com','Secom - LMTS')
-            ->view('emails.CartaoServidor')
-            ->attach($this->path, ['as' => 'FelizAniversario.jpg']);
+            ->from('naoresponder.lmts@gmail.com','DCOMU')
+            ->view('emails.CartaoServidor');
     }
 }
