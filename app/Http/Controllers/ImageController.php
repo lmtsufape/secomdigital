@@ -36,7 +36,7 @@ class ImageController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'filename' => 'required |image | mimes:jpg,jpeg,png,gif,bmp',
+            'filename' => 'required | image | mimes:jpg,jpeg,png,gif,bmp',
         ]);
 
         $imagens = \App\Image::all();
@@ -82,7 +82,7 @@ class ImageController extends Controller
 
         $imagemGerada = new Imagem();
         $imagemGerada->title = 'temp';
-        $imagemGerada->file = 'temp' . '.' . $img->extension;
+        $imagemGerada->file = 'temp' . '.' . 'jpg';
         $img->save(storage_path('app/public/') . $imagemGerada->file);
         $imagemGerada->path = storage_path('app/public/') . $imagemGerada->file;
         return $imagemGerada->path;
@@ -176,7 +176,7 @@ class ImageController extends Controller
         $imgTemp = Imagem::where('title', 'temp')->first();
         $imagemGerada = new Imagem();
         $imagemGerada->title = 'temp';
-        $imagemGerada->file = 'temp' . '.' . $img->extension;
+        $imagemGerada->file = 'temp' . '.' . 'jpg';
         if ($imgTemp == null) {
             $imagemGerada->save();
         }
