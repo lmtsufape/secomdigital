@@ -92,8 +92,8 @@ class ImageController extends Controller
     {
         $servidores = Servidor::all();
         $hoje = date('d-m', strtotime(today()));
-        $aniver = date('d-m', strtotime('1973-05-13'));
-        $imagemOriginal = Imagem::where('title', 'cartaobackground')->first();
+        //$aniver = date('d-m', strtotime('1973-05-13'));
+        //$imagemOriginal = Imagem::where('title', 'cartaobackground')->first();
         foreach ($servidores as $servidor) {
             $nomes = explode(" ", $servidor->nome);
             $servidorAniver = date('d-m', strtotime($servidor->data_nascimento));
@@ -109,7 +109,7 @@ class ImageController extends Controller
     {
         if ($request->hasFile('filename')) {
             $image = $request->file('filename');
-            $filename = $request->title . '.' . $request->filename->extension();
+            $filename = $request->title . '.' . 'jpg';
             $destination = storage_path('app/public');
 
             if ($image->move($destination, $filename)) {
