@@ -12,25 +12,29 @@ use App\Font;
 
 class ServidorController extends Controller
 {
-    public function index(){
+    public function index()
+    {
 
-      $servidores = Servidor::paginate(10);
+        $servidores = Servidor::paginate(10);
 
-      return view('servidor.index', compact('servidores'));
+        return view('servidor.index', compact('servidores'));
     }
 
-    public function create(){
+    public function create()
+    {
 
-      return view('servidor.create');
+        return view('servidor.create');
     }
 
-    public function store(ServidorRequest $request){
+    public function store(ServidorRequest $request)
+    {
 
-      $data = $request->all();
-      $servidor = Servidor::create($data);
+        $data = $request->all();
+        $servidor = Servidor::create($data);
 
-      return redirect()->route('servidor.index')->with(['mensagem'=>"Servidor cadastrado com sucesso!"]);
+        return redirect()->route('servidor.index')->with(['mensagem' => "Servidor cadastrado com sucesso!"]);
     }
+
     public function edit($id)
     {
         $servidor = Servidor::findOrFail($id);
@@ -45,7 +49,7 @@ class ServidorController extends Controller
         $servidor = Servidor::find($id);
         $servidor->update($data);
 
-        return redirect()->route('servidor.index')->with(['mensagem'=>"Servidor atualizado com sucesso!"]);
+        return redirect()->route('servidor.index')->with(['mensagem' => "Servidor atualizado com sucesso!"]);
     }
 
     public function destroy($id)
@@ -53,13 +57,14 @@ class ServidorController extends Controller
         $servidor = Servidor::find($id);
         $servidor->delete();
 
-        return redirect()->route('servidor.index')->with(['mensagem'=>"Servidor excluído com sucesso!"]);
+        return redirect()->route('servidor.index')->with(['mensagem' => "Servidor excluído com sucesso!"]);
     }
 
-    public function enviarEmail(Request $request){
-      $path = $request->image;
+    public function enviarEmail(Request $request)
+    {
+        $path = $request->image;
         Mail::to($request->email)
             ->send(new CartaoServidor($path));
-      return redirect()->back()->with(['mensagem'=>"Cartão Enviado com Sucesso!"]);
+        return redirect()->back()->with(['mensagem' => "Cartão Enviado com Sucesso!"]);
     }
 }
