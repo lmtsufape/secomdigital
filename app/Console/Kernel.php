@@ -15,7 +15,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        \App\Console\Commands\CartoesAutomaticos::class,
     ];
 
     /**
@@ -26,9 +26,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        //$schedule->call('App\Http\Controllers\ClippingController@gerarEmail')->timezone('America/Sao_Paulo')->everyMinute();
-        $schedule->call('App\Http\Controllers\ImageController@envioAutomaticoCartao')->timezone('America/Sao_Paulo')->dailyAt('06:00');
-        //$schedule->call('App\Http\Controllers\ImageController@envioAutomaticoCartao')->timezone('America/Sao_Paulo')->everyMinute();
+        $schedule->command('cartoesAutomaticos:cron')
+                 ->dailyAt('06:00')
+                 ->timezone('America/Sao_Paulo');
     }
 
     /**
